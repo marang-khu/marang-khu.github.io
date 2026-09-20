@@ -332,6 +332,58 @@ main { min-height: 60vh; }
 .mk-dropdown[open] > .mk-dropdown-menu { display: block !important; }
 .mk-brand:link, .mk-brand:visited { color: #1f3b57; text-decoration: none; }
 .mk-nav-link:link, .mk-nav-link:visited { color: #514c45; text-decoration: none; }
+
+/* Shared site cover */
+.site-cover {
+  width: 100%;
+  margin: 0;
+  background-image: url('/assets/images/site-cover.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border-bottom: 1px solid #e9e5dd;
+}
+
+.site-cover--home {
+  min-height: min(72vw, 820px);
+  aspect-ratio: 2048 / 1092;
+  background-size: cover;
+  background-position: center center;
+}
+
+.site-cover--inner {
+  height: clamp(260px, 31vw, 430px);
+  background-position: center 44%;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.home-main {
+  min-height: 0 !important;
+}
+
+@media (max-width: 700px) {
+  .site-cover--home {
+    min-height: 64vh;
+    aspect-ratio: auto;
+    background-position: 50% 42%;
+  }
+
+  .site-cover--inner {
+    height: 250px;
+    background-position: 50% 42%;
+  }
+}
 </style>
 </head>
 <body>
@@ -373,6 +425,9 @@ main { min-height: 60vh; }
     </nav>
   </div>
 </header>
+<section class="site-cover site-cover--inner" aria-label="迒領域台語研究室">
+  <span class="visually-hidden">迒領域台語研究室</span>
+</section>
 <main>
 <section class="education-section">
   <div class="education-heading">
