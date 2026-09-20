@@ -1,44 +1,23 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const navButtons = document.querySelectorAll(".nav-button, .dropdown-submenu-button");
+document.addEventListener("DOMContentLoaded", function () {
+  const menus = Array.from(document.querySelectorAll("details.mk-dropdown"));
 
-  navButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      const item = button.closest(".nav-item, .dropdown-submenu");
-      const isOpen = item.classList.contains("open");
-
-      if (item.classList.contains("nav-item")) {
-        document.querySelectorAll(".nav-item.open").forEach((el) => {
-          if (el !== item) el.classList.remove("open");
-        });
-      } else {
-        item.parentElement.querySelectorAll(":scope > .dropdown-submenu.open").forEach((el) => {
-          if (el !== item) el.classList.remove("open");
-        });
-      }
-
-      item.classList.toggle("open", !isOpen);
-      button.setAttribute("aria-expanded", String(!isOpen));
-    });
-  });
-
-  document.addEventListener("click", () => {
-    document.querySelectorAll(".nav-item.open, .dropdown-submenu.open").forEach((el) => {
-      el.classList.remove("open");
-      const btn = el.querySelector(":scope > button");
-      if (btn) btn.setAttribute("aria-expanded", "false");
-    });
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      document.querySelectorAll(".nav-item.open, .dropdown-submenu.open").forEach((el) => {
-        el.classList.remove("open");
-        const btn = el.querySelector(":scope > button");
-        if (btn) btn.setAttribute("aria-expanded", "false");
+  menus.forEach(function (menu) {
+    menu.addEventListener("toggle", function () {
+      if (!menu.open) return;
+      menus.forEach(function (other) {
+        if (other !== menu) other.open = false;
       });
+    });
+  });
+
+  document.addEventListener("click", function (event) {
+    if (event.target.closest("details.mk-dropdown")) return;
+    menus.forEach(function (menu) { menu.open = false; });
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      menus.forEach(function (menu) { menu.open = false; });
     }
   });
 });

@@ -4,45 +4,33 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>台語文學選讀研究｜Marang Khu</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
 </head>
 <body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <a class="brand" href="/">Marang Khu</a>
+<header class="mk-header">
+  <div class="mk-header-inner">
+    <a class="mk-brand" href="/">Marang Khu</a>
 
-    <nav class="nav" aria-label="主要導覽">
-      <div class="nav-item">
-        <button class="nav-button" type="button" aria-expanded="false">個人</button>
-        <ul class="dropdown-menu">
+    <nav class="mk-nav" aria-label="主要導覽">
+      <details class="mk-dropdown">
+        <summary>個人</summary>
+        <ul class="mk-dropdown-menu">
           <li><a href="/個人/">個人介紹</a></li>
           <li><a href="/個人/學歷/">學歷</a></li>
           <li><a href="/個人/經歷/">經歷</a></li>
-
-          <li class="dropdown-submenu">
-            <button class="dropdown-submenu-button" type="button" aria-expanded="false">著作</button>
-            <ul class="dropdown-submenu-menu">
-              <li><a href="/個人/著作/">著作總覽</a></li>
-              <li><a href="/個人/著作/學術著作/">學術著作</a></li>
-              <li><a href="/個人/著作/創作/">文學創作</a></li>
-            </ul>
-          </li>
-
-          <li><a href="/個人/教學/">教學</a></li>
         </ul>
-      </div>
+      </details>
 
-      <div class="nav-item">
-        <button class="nav-button" type="button" aria-expanded="false">著作</button>
-        <ul class="dropdown-menu">
-          <li><a href="/個人/著作/">著作總覽</a></li>
+      <details class="mk-dropdown">
+        <summary>著作</summary>
+        <ul class="mk-dropdown-menu">
           <li><a href="/個人/著作/學術著作/">學術著作</a></li>
           <li><a href="/個人/著作/創作/">文學創作</a></li>
         </ul>
-      </div>
+      </details>
 
-      <a href="/個人/教學/">教學</a>
-      <a href="/研究室/當teh工程/">研究</a>
+      <a class="mk-nav-link" href="/個人/教學/">教學</a>
+      <a class="mk-nav-link" href="/研究室/當teh工程/">研究</a>
     </nav>
   </div>
 </header>
@@ -55,6 +43,6 @@
 </section>
 </main>
 <footer class="site-footer">Marang Khu</footer>
-<script src="/assets/js/main.js"></script>
+<script src="../../../assets/js/main.js"></script>
 </body>
 </html>
