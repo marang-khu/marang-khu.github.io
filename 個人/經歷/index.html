@@ -10,11 +10,37 @@
 <header class="site-header">
   <div class="site-header__inner">
     <a class="brand" href="/">Marang Khu</a>
+
     <nav class="nav" aria-label="主要導覽">
-      <a href="/個人/">個人</a>
-      <a href="/個人/學歷/">學歷</a>
-      <a href="/個人/經歷/">經歷</a>
-      <a href="/個人/著作/">著作</a>
+      <div class="nav-item">
+        <button class="nav-button" type="button" aria-expanded="false">個人</button>
+        <ul class="dropdown-menu">
+          <li><a href="/個人/">個人介紹</a></li>
+          <li><a href="/個人/學歷/">學歷</a></li>
+          <li><a href="/個人/經歷/">經歷</a></li>
+
+          <li class="dropdown-submenu">
+            <button class="dropdown-submenu-button" type="button" aria-expanded="false">著作</button>
+            <ul class="dropdown-submenu-menu">
+              <li><a href="/個人/著作/">著作總覽</a></li>
+              <li><a href="/個人/著作/學術著作/">學術著作</a></li>
+              <li><a href="/個人/著作/創作/">文學創作</a></li>
+            </ul>
+          </li>
+
+          <li><a href="/個人/教學/">教學</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-item">
+        <button class="nav-button" type="button" aria-expanded="false">著作</button>
+        <ul class="dropdown-menu">
+          <li><a href="/個人/著作/">著作總覽</a></li>
+          <li><a href="/個人/著作/學術著作/">學術著作</a></li>
+          <li><a href="/個人/著作/創作/">文學創作</a></li>
+        </ul>
+      </div>
+
       <a href="/個人/教學/">教學</a>
       <a href="/研究室/當teh工程/">研究</a>
     </nav>
@@ -23,16 +49,14 @@
 <main>
 <section style="
   max-width: 980px;
-  margin: 0 auto;
-  padding: 56px 28px;
-  padding-bottom: 6px;
+  margin: 36px auto;
+  padding: 56px 28px 6px;
   font-family: 'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;
   color: #2f2a24;
   background: linear-gradient(135deg, #faf6ed 0%, #ffffff 55%, #f3f7ef 100%);
   border-radius: 24px;
   box-shadow: 0 10px 30px rgba(60, 45, 30, 0.10);
 ">
-
   <div style="margin-bottom: 34px;">
     <div style="
       display: inline-block;
@@ -44,129 +68,51 @@
       background: #eef5e6;
       border-radius: 999px;
       font-weight: 600;
-    ">
-      Experience
-    </div>
-
-       </p>
+    ">Experience</div>
   </div>
 
-  <div style="
-    display: grid;
-    gap: 18px;
-  ">
-
-    <article style="
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 22px;
-      padding: 24px 26px;
-      background: rgba(255,255,255,0.88);
-      border: 1px solid #e6dccb;
-      border-left: 6px solid #8fbf6a;
-      border-radius: 18px;
-      box-shadow: 0 6px 18px rgba(40, 40, 40, 0.06);
-    ">
-      <div style="font-weight: 700; color: #6b8548; font-size: 15px;">2025.08–迄今</div>
-      <div>
-        <h3 style="margin: 0 0 8px; font-size: 22px; color: #1f3b57;">國立臺中教育大學</h3>
-        <div style="font-size: 18px; font-weight: 700; color: #2f2a24;">台灣語文學系｜助理教授</div>
-              </div>
+  <div style="display:grid; gap:18px;">
+    <article style="display:grid;grid-template-columns:150px 1fr;gap:22px;padding:24px 26px;background:rgba(255,255,255,0.88);border:1px solid #e6dccb;border-left:6px solid #8fbf6a;border-radius:18px;box-shadow:0 6px 18px rgba(40,40,40,0.06);">
+      <div style="font-weight:700;color:#6b8548;font-size:15px;">2025.08–迄今</div>
+      <div><h3 style="margin:0 0 8px;font-size:22px;color:#1f3b57;">國立臺中教育大學</h3><div style="font-size:18px;font-weight:700;color:#2f2a24;">台灣語文學系｜助理教授</div></div>
     </article>
 
-    <article style="
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 22px;
-      padding: 24px 26px;
-      background: rgba(255,255,255,0.88);
-      border: 1px solid #e6dccb;
-      border-left: 6px solid #bfa36a;
-      border-radius: 18px;
-      box-shadow: 0 6px 18px rgba(40, 40, 40, 0.06);
-    ">
-      <div style="font-weight: 700; color: #9a7c36; font-size: 15px;">2024.08–2025.07</div>
-      <div>
-        <h3 style="margin: 0 0 8px; font-size: 22px; color: #1f3b57;">國立臺中教育大學</h3>
-        <div style="font-size: 18px; font-weight: 700; color: #2f2a24;">台灣語文學系｜兼任助理教授</div> </div>
-           </article>
-
-    <article style="
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 22px;
-      padding: 24px 26px;
-      background: rgba(255,255,255,0.88);
-      border: 1px solid #e6dccb;
-      border-left: 6px solid #7895a8;
-      border-radius: 18px;
-      box-shadow: 0 6px 18px rgba(40, 40, 40, 0.06);
-    ">
-      <div style="font-weight: 700; color: #5c7f96; font-size: 15px;">2021.02–2025.02</div>
-      <div>
-        <h3 style="margin: 0 0 8px; font-size: 22px; color: #1f3b57;">國立成功大學</h3>
-        <div style="font-size: 18px; font-weight: 700; color: #2f2a24;">台灣文學系｜兼任助理教授</div>
-        
-      </div>
+    <article style="display:grid;grid-template-columns:150px 1fr;gap:22px;padding:24px 26px;background:rgba(255,255,255,0.88);border:1px solid #e6dccb;border-left:6px solid #bfa36a;border-radius:18px;box-shadow:0 6px 18px rgba(40,40,40,0.06);">
+      <div style="font-weight:700;color:#9a7c36;font-size:15px;">2024.08–2025.07</div>
+      <div><h3 style="margin:0 0 8px;font-size:22px;color:#1f3b57;">國立臺中教育大學</h3><div style="font-size:18px;font-weight:700;color:#2f2a24;">台灣語文學系｜兼任助理教授</div></div>
     </article>
 
-    <article style="
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 22px;
-      padding: 24px 26px;
-      background: rgba(255,255,255,0.88);
-      border: 1px solid #e6dccb;
-      border-left: 6px solid #8fbf6a;
-      border-radius: 18px;
-      box-shadow: 0 6px 18px rgba(40, 40, 40, 0.06);
-    ">
-      <div style="font-weight: 700; color: #6b8548; font-size: 15px;">2021.10–2022.02</div>
-      <div>
-        <h3 style="margin: 0 0 8px; font-size: 22px; color: #1f3b57;">德國魯爾波鴻大學</h3>
-        <div style="font-size: 18px; font-weight: 700; color: #2f2a24;">台灣語言文化研究中心｜兼任助理教授</div>
-              </div>
+    <article style="display:grid;grid-template-columns:150px 1fr;gap:22px;padding:24px 26px;background:rgba(255,255,255,0.88);border:1px solid #e6dccb;border-left:6px solid #7895a8;border-radius:18px;box-shadow:0 6px 18px rgba(40,40,40,0.06);">
+      <div style="font-weight:700;color:#5c7f96;font-size:15px;">2021.02–2025.02</div>
+      <div><h3 style="margin:0 0 8px;font-size:22px;color:#1f3b57;">國立成功大學</h3><div style="font-size:18px;font-weight:700;color:#2f2a24;">台灣文學系｜兼任助理教授</div></div>
     </article>
 
-    <article style="
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 22px;
-      padding: 24px 26px;
-      background: rgba(255,255,255,0.88);
-      border: 1px solid #e6dccb;
-      border-left: 6px solid #bfa36a;
-      border-radius: 18px;
-      box-shadow: 0 6px 18px rgba(40, 40, 40, 0.06);
-    ">
-      <div style="font-weight: 700; color: #9a7c36; font-size: 15px;">2015.02–2020.06</div>
-      <div>
-        <h3 style="margin: 0 0 8px; font-size: 22px; color: #1f3b57;">高雄醫學大學</h3>
-        <div style="font-size: 18px; font-weight: 700; color: #2f2a24;">醫學系｜兼任助理教授</div>
-              </div>
+    <article style="display:grid;grid-template-columns:150px 1fr;gap:22px;padding:24px 26px;background:rgba(255,255,255,0.88);border:1px solid #e6dccb;border-left:6px solid #8fbf6a;border-radius:18px;box-shadow:0 6px 18px rgba(40,40,40,0.06);">
+      <div style="font-weight:700;color:#6b8548;font-size:15px;">2021.10–2022.02</div>
+      <div><h3 style="margin:0 0 8px;font-size:22px;color:#1f3b57;">德國魯爾波鴻大學</h3><div style="font-size:18px;font-weight:700;color:#2f2a24;">台灣語言文化研究中心｜兼任助理教授</div></div>
     </article>
 
-    <article style="
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 22px;
-      padding: 24px 26px;
-      background: rgba(255,255,255,0.88);
-      border: 1px solid #e6dccb;
-      border-left: 6px solid #7895a8;
-      border-radius: 18px;
-      box-shadow: 0 6px 18px rgba(40, 40, 40, 0.06);
-    ">
-      <div style="font-weight: 700; color: #5c7f96; font-size: 15px;">2008.08–2012.07</div>
-      <div>
-        <h3 style="margin: 0 0 8px; font-size: 22px; color: #1f3b57;">東海大學</h3>
-        <div style="font-size: 18px; font-weight: 700; color: #2f2a24;">生命科學系｜助理教授</div>
-        
-      </div>
+    <article style="display:grid;grid-template-columns:150px 1fr;gap:22px;padding:24px 26px;background:rgba(255,255,255,0.88);border:1px solid #e6dccb;border-left:6px solid #bfa36a;border-radius:18px;box-shadow:0 6px 18px rgba(40,40,40,0.06);">
+      <div style="font-weight:700;color:#9a7c36;font-size:15px;">2015.02–2020.06</div>
+      <div><h3 style="margin:0 0 8px;font-size:22px;color:#1f3b57;">高雄醫學大學</h3><div style="font-size:18px;font-weight:700;color:#2f2a24;">醫學系｜兼任助理教授</div></div>
     </article>
 
+    <article style="display:grid;grid-template-columns:150px 1fr;gap:22px;padding:24px 26px;background:rgba(255,255,255,0.88);border:1px solid #e6dccb;border-left:6px solid #7895a8;border-radius:18px;box-shadow:0 6px 18px rgba(40,40,40,0.06);">
+      <div style="font-weight:700;color:#5c7f96;font-size:15px;">2008.08–2012.07</div>
+      <div><h3 style="margin:0 0 8px;font-size:22px;color:#1f3b57;">東海大學</h3><div style="font-size:18px;font-weight:700;color:#2f2a24;">生命科學系｜助理教授</div></div>
+    </article>
   </div>
 </section>
+
+<style>
+@media (max-width:700px){
+  main section article[style*="grid-template-columns:150px 1fr"]{
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+  }
+}
+</style>
+
 </main>
 <footer class="site-footer">Marang Khu</footer>
 <script src="/assets/js/main.js"></script>

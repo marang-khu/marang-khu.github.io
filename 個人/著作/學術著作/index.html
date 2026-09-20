@@ -10,21 +10,458 @@
 <header class="site-header">
   <div class="site-header__inner">
     <a class="brand" href="/">Marang Khu</a>
+
     <nav class="nav" aria-label="主要導覽">
-      <a href="/個人/">個人</a>
-      <a href="/個人/學歷/">學歷</a>
-      <a href="/個人/經歷/">經歷</a>
-      <a href="/個人/著作/">著作</a>
+      <div class="nav-item">
+        <button class="nav-button" type="button" aria-expanded="false">個人</button>
+        <ul class="dropdown-menu">
+          <li><a href="/個人/">個人介紹</a></li>
+          <li><a href="/個人/學歷/">學歷</a></li>
+          <li><a href="/個人/經歷/">經歷</a></li>
+
+          <li class="dropdown-submenu">
+            <button class="dropdown-submenu-button" type="button" aria-expanded="false">著作</button>
+            <ul class="dropdown-submenu-menu">
+              <li><a href="/個人/著作/">著作總覽</a></li>
+              <li><a href="/個人/著作/學術著作/">學術著作</a></li>
+              <li><a href="/個人/著作/創作/">文學創作</a></li>
+            </ul>
+          </li>
+
+          <li><a href="/個人/教學/">教學</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-item">
+        <button class="nav-button" type="button" aria-expanded="false">著作</button>
+        <ul class="dropdown-menu">
+          <li><a href="/個人/著作/">著作總覽</a></li>
+          <li><a href="/個人/著作/學術著作/">學術著作</a></li>
+          <li><a href="/個人/著作/創作/">文學創作</a></li>
+        </ul>
+      </div>
+
       <a href="/個人/教學/">教學</a>
       <a href="/研究室/當teh工程/">研究</a>
     </nav>
   </div>
 </header>
 <main>
-<section class="page-shell">
-  <h1>學術著作</h1>
-  <div class="placeholder">
-    已保留 Google Sites 原有網址階層。此頁的原始內容目前無法由公開抓取端完整讀取，尚未改寫或臆造內容。
+<section class="pub-section">
+  <style>
+    .pub-section {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 28px;
+      font-family: 'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;
+      color: #2f2a24;
+      background: linear-gradient(135deg, #faf6ed 0%, #ffffff 55%, #f3f7ef 100%);
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(60, 45, 30, 0.10);
+    }
+
+    .pub-label {
+      display: inline-block;
+      padding: 6px 14px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: #5d7442;
+      background: #eef5e6;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .pub-section h2 {
+      margin: 0 0 14px 0;
+      font-size: 34px;
+      line-height: 1.25;
+      color: #1f3b57;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .pub-intro {
+      max-width: 780px;
+      margin: 0 0 28px 0;
+      font-size: 17px;
+      line-height: 1.9;
+      color: #5f5a52;
+    }
+
+    .pub-section input[type="radio"] {
+      display: none;
+    }
+
+    .pub-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0 0 34px 0;
+    }
+
+    .pub-tabs label {
+      border: 1px solid #d8ccb7;
+      background: rgba(255,255,255,0.86);
+      color: #1f3b57;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(40, 40, 40, 0.05);
+    }
+
+    .pub-tabs label:hover {
+      transform: translateY(-1px);
+      background: #eef5e6;
+      border-color: #8fbf6a;
+    }
+
+    #pub-all:checked ~ .pub-tabs label[for="pub-all"],
+    #pub-dissertation:checked ~ .pub-tabs label[for="pub-dissertation"],
+    #pub-journal:checked ~ .pub-tabs label[for="pub-journal"],
+    #pub-conference:checked ~ .pub-tabs label[for="pub-conference"],
+    #pub-bookchapter:checked ~ .pub-tabs label[for="pub-bookchapter"],
+    #pub-translation:checked ~ .pub-tabs label[for="pub-translation"] {
+      color: #ffffff;
+      background: #1f3b57;
+      border-color: #1f3b57;
+    }
+
+    .pub-category {
+      margin-bottom: 34px;
+    }
+
+    .pub-category-title {
+      margin: 0 0 18px 0;
+      padding: 0 0 0 16px;
+      font-size: 24px;
+      line-height: 1.4;
+      color: #1f3b57;
+      font-weight: 800;
+      border-left: 6px solid #8fbf6a;
+    }
+
+    .pub-category-title span {
+      display: block;
+      margin-top: 4px;
+      font-size: 14px;
+      color: #7a746b;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .pub-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .pub-item {
+      padding: 22px 24px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid #e6dccb;
+      border-left: 6px solid #bfa36a;
+      border-radius: 18px;
+      box-shadow: 0 6px 18px rgba(40, 40, 40, 0.06);
+      line-height: 1.85;
+      font-size: 16px;
+      color: #2f2a24;
+    }
+
+    .cat-dissertation .pub-item {
+      border-left-color: #8fbf6a;
+    }
+
+    .cat-journal .pub-item {
+      border-left-color: #7895a8;
+    }
+
+    .cat-conference .pub-item {
+      border-left-color: #c98f67;
+    }
+
+    .cat-bookchapter .pub-item {
+      border-left-color: #bfa36a;
+    }
+
+    .cat-translation .pub-item {
+      border-left-color: #8f7bb8;
+    }
+
+    .pub-item a {
+      color: #1f5f8b;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .pub-item a:hover {
+      text-decoration: underline;
+    }
+
+    #pub-dissertation:checked ~ .pub-content .pub-category,
+    #pub-journal:checked ~ .pub-content .pub-category,
+    #pub-conference:checked ~ .pub-content .pub-category,
+    #pub-bookchapter:checked ~ .pub-content .pub-category,
+    #pub-translation:checked ~ .pub-content .pub-category {
+      display: none;
+    }
+
+    #pub-dissertation:checked ~ .pub-content .cat-dissertation,
+    #pub-journal:checked ~ .pub-content .cat-journal,
+    #pub-conference:checked ~ .pub-content .cat-conference,
+    #pub-bookchapter:checked ~ .pub-content .cat-bookchapter,
+    #pub-translation:checked ~ .pub-content .cat-translation {
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .pub-section {
+        padding: 38px 18px;
+      }
+
+      .pub-section h2 {
+        font-size: 30px;
+      }
+
+      .pub-tabs {
+        gap: 8px;
+      }
+
+      .pub-tabs label {
+        padding: 9px 14px;
+        font-size: 14px;
+      }
+
+      .pub-category-title {
+        font-size: 22px;
+      }
+
+      .pub-item {
+        padding: 18px 18px;
+        font-size: 15px;
+      }
+    }
+  </style>
+
+
+  <input type="radio" name="pub-filter" id="pub-all" checked>
+  <input type="radio" name="pub-filter" id="pub-dissertation">
+  <input type="radio" name="pub-filter" id="pub-journal">
+  <input type="radio" name="pub-filter" id="pub-conference">
+  <input type="radio" name="pub-filter" id="pub-bookchapter">
+  <input type="radio" name="pub-filter" id="pub-translation">
+
+  <div class="pub-tabs">
+    <label for="pub-all">全部</label>
+    <label for="pub-dissertation">博士論文</label>
+    <label for="pub-journal">期刊論文</label>
+    <label for="pub-conference">研討會論文</label>
+    <label for="pub-bookchapter">書籍專章</label>
+    <label for="pub-translation">翻譯出版</label>
+  </div>
+
+  <div class="pub-content">
+
+    <section class="pub-category cat-dissertation">
+      <h3 class="pub-category-title">
+        博士論文
+        <span>Doctoral Dissertations</span>
+      </h3>
+
+      <div class="pub-list">
+        <article class="pub-item">
+          邱偉欣（2023）《對白話字語料內底ê台語動詞「ū」佮「bô」ê相依結構佮結合力款式分析》。國立成功大學台灣文學系。
+          <a href="https://drive.google.com/file/d/1wSJhgjSIME4aP_UWoCAz7J1KlJDORmqV/view?usp=sharing" target="_blank">閱讀</a>
+        </article>
+
+        <article class="pub-item">
+          Chiu, Wei-Hsin. (2006)<i>The TORNADO2 gene of Arabidopsis thaliana affects cellular decisions in the shoot apical meristem</i>. PhD thesis, Universität zu Köln.
+          <a href="https://drive.google.com/file/d/1FPSpb6BKyLcl1VFHRMYFbkktpCyi2gjw/view?usp=sharing" target="_blank">閱讀</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="pub-category cat-journal">
+      <h3 class="pub-category-title">
+        期刊論文
+        <span>Journal Articles</span>
+      </h3>
+
+      <div class="pub-list">
+        <article class="pub-item">
+          邱偉欣（2026）〈啖試褒歌 ê 認知文體學分析 — 用「佮君約在後壁溝」做例〉《歌仔冊年刊》，6：49–60。<a href="https://drive.google.com/file/d/1DUltrrs4K2IdNLp8ovCxjOwpFO52udEs/view?usp=sharing" target="_blank">閱讀</a>
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2026）〈日治時期譯者陳清忠的台語翻譯實踐〉《臺灣文學研究學報》，42：1–40。
+          <a href="https://drive.google.com/file/d/1AgBd_7eSK4_W0Ga9aASvr-02QAYfDU5y/view?usp=sharing" target="_blank">閱讀</a>
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2024）〈語言名稱「臺灣台語」之商榷〉《新世紀智庫論壇》，107：87–91。
+          <a href="https://www.taiwanncf.org.tw/ttforum/107/107-13.pdf" target="_blank">閱讀</a>
+        </article>
+
+        <article class="pub-item">
+          陳麗君、韓瑞容、陳建瑋、鄭順林、邱偉欣（2024）〈國中、小學生台語文的識字量推估設計─以臺南地區為例〉《中等教育》，75（3）：51–78。
+          <a href="https://tecs.otecs.ntnu.edu.tw/upload/psls/03_psls_publication/publication/publication_1/publication_dlss_se_753.pdf" target="_blank">閱讀</a>
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2021）〈郭秋生tī《南音》內底ê台灣話文實踐佮困境對現代台語教育ê啟示〉《台灣學誌》，20：35–68。
+          <a href="https://www.tcll.ntnu.edu.tw/twnica/downloadfile.php?issue_id=24&paper_id=157" target="_blank">閱讀</a>
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2016）〈白話字小說ê誕生kap發展〉《臺江臺語文學》，18：30–50。
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2015）〈聯合國世界母語日給台語／文的啟示〉《新世紀智庫論壇》，69：40–51。
+          <a href="https://www.taiwanncf.org.tw/ttforum/69/69-07.pdf" target="_blank">閱讀</a>
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2015）〈臺南做十六歲傳說ê詮釋〉《臺江臺語文學》，15：10–34。
+          <a href="https://www.academia.edu/43838990/%E8%87%BA%E5%8D%97%E5%81%9A%E5%8D%81%E5%85%AD%E6%AD%B2%E5%82%B3%E8%AA%AAe_%E8%A9%AE%E9%87%8B" target="_blank">閱讀</a>
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2013）Vulnerable Mother Tongues in Taiwan: The Past, Present and Future Prospects. 《台語研究》，5（2）：54–75。
+        </article>
+
+        <article class="pub-item">
+          林良憲、邱偉欣（2013）〈尋與巡——林園鳳芸宮媽祖海上巡香踏查〉《高雄文獻》，3（2）：157–170。
+          <a href="https://khm.org.tw/storage/files/488/original/70749135085f49c53d497be.pdf" target="_blank">閱讀</a>
+        </article>
+
+        <article class="pub-item">
+          Chiu WH, Chandler J, Cnops G, Lijsebettens MV, and Werr W. (2007) Mutations in the <i>TORNADO2</i> gene affect cellular decisions in the peripheral zone of the shoot apical meristem of Arabidopsis thaliana. <i>Plant Molecular Biology</i>, 63(6), 731–744.
+          <a href="https://www.researchgate.net/publication/6454891_Mutations_in_the_TORNADO2_gene_affect_cellular_decisions_in_the_peripheral_zone_of_the_shoot_apical_meristem_of_Arabidopsis_thaliana" target="_blank">閱讀</a>
+        </article>
+
+        <article class="pub-item">
+          Escudero LM, Wei SY, Chiu WH, Modolell J, and Hsu JC. (2003) Echinoid synergizes with the Notch signaling pathway in Drosophila mesothorax bristle patterning. <i>Development</i>, 130(25), 6305–6316.
+        </article>
+
+        <article class="pub-item">
+          Islam R, Wei SY, Chiu WH, Hortsch M, and Hsu JC. (2003) Neuroglian activates Echinoid to antagonize the Drosophila EGF receptor signaling pathway. <i>Development</i>, 130(10), 2051–2059.
+        </article>
+
+        <article class="pub-item">
+          Bai J, Chiu W, Wang J, Tzeng T, Perrimon N, and Hsu J. (2001) The cell adhesion molecule Echinoid defines a new pathway that antagonizes the Drosophila EGF receptor signaling pathway. <i>Development</i>, 128(4), 591–601.
+        </article>
+
+      </div>
+    </section>
+
+    <section class="pub-category cat-conference">
+      <h3 class="pub-category-title">
+        研討會論文
+        <span>Conference Papers</span>
+      </h3>
+
+      <div class="pub-list">
+
+        <article class="pub-item">
+          邱偉欣（2026），世界文學的台語翻譯現狀，2026文化研究年會暨國際學術研討會。臺北：國立臺灣師範大學和平校區。
+        </article>
+
+        <article class="pub-item">
+          邱偉欣、陳麗君、張婉鈴、盧文祥（2024），中學台語教學備課平台設計研究，第十五屆台灣語言及其教學國際學術研討會。高雄：國立高雄師範大學。
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2023），用相依語法ê觀點探討台語動詞「有（ū）」ê結合力款式，第八屆青年學者台灣語言學術研討會。新竹：國立清華大學。
+        </article>
+
+        <article class="pub-item">
+          陳麗君、陳建瑋、韓瑞容、李迎采、邱偉欣（2023），台灣台語識字量推估研究的初步，2023 Hawai’i International Symposium on Chinese Studies。Hawaii：Honolulu。
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2022），A Look at the Translation of Literature into Taiwanese from the Perspective of Tân Chhengtiong's Translation Work, 5th International Conference on Vietnamese and Taiwanese Studies。台南：國立成功大學。
+        </article>
+
+        <article class="pub-item">
+          邱偉欣、陳建瑋、韓瑞容、李迎采、鄭順林、林佳瑩、陳麗君（2022），台灣1–9年級台語識字測驗之開發研究，第十四屆台灣語言及其教學暨台灣學「蛻變的聲音」國際學術研討會。台南：國立成功大學。
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2021），台灣新文學論戰的先聲：白話字與漢字的優劣論述，第14屆全國研究生歷史學論文研討會。台北：國立台北教育大學，台灣文化研究所。
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2020），《南音》內底ê臺灣話文實踐佮困境，2020台灣文學教學國際研討會。台南：國立成功大學，台灣文學系。
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2013），危脆台灣母語－它的過去、現在和對未來的展望，第六屆台灣羅馬字國際研討會。台南：國立成功大學，台灣文學系。
+        </article>
+
+        <article class="pub-item">
+          王淳宇、邱偉欣（2010）〈病毒 IRES 的序列分析〉《東海大學生命科學系第52屆專題論文集》。
+        </article>
+
+        <article class="pub-item">
+          曾詠鈿、邱偉欣（2010）〈以 MySQL 建置生物序列資料庫〉《東海大學生命科學系第52屆專題論文集》。
+        </article>
+
+        <article class="pub-item">
+          Chiu WH, Chandler J, and Werr W. (2006). Mutations in the TORNADO2 Gene Enlarge the Peripheral Zone Relative to the Stem Cell Zone in the Shoot Apical Meristem of Arabidopsis thaliana. 17th International Conference on Arabidopsis Research.
+        </article>
+
+        <article class="pub-item">
+          Chiu WH, Chandler J, and Werr W. (2004). Effectors of SHOOTMERISTEMLESS function. 15th International Conference on Arabidopsis Research.
+        </article>
+
+        <article class="pub-item">
+          Chiu WH and Ilg UJ. (2003). Moving objects, anticipation, and smooth pursuit eye movement. 6th Tübinger Wahrnehmungskonferenz.
+        </article>
+
+      </div>
+    </section>
+
+    <section class="pub-category cat-bookchapter">
+      <h3 class="pub-category-title">
+        書籍專章
+        <span>Book Chapters</span>
+      </h3>
+
+      <div class="pub-list">
+
+        <article class="pub-item">
+          李沅翰、邱偉欣、盧文祥（2023）〈台語華語語法語意規則建立對華語母語者之台語學習網站開發〉《多聲道的台灣共同體：跨語域交織的主體性和創造性》，101–118。台南：成大出版社。
+        </article>
+
+        <article class="pub-item">
+          邱偉欣（2022），鄭良光、陳雷總編輯，〈Ùi台語小說發展來看台文通訊 — 論白話字全羅小說到白話字羅漢小說〉《台文通訊30冬紀念特刊》，151–153。台南：亞西亞國際傳播社。
+        </article>
+
+      </div>
+    </section>
+
+    <section class="pub-category cat-translation">
+      <h3 class="pub-category-title">
+        翻譯出版
+        <span>Translated Books</span>
+      </h3>
+
+      <div class="pub-list">
+
+        <article class="pub-item">
+        <a href="https://www.books.com.tw/products/0010993443?srsltid=AfmBOoq2JPdj5M_rO5hvVxprdKQlB9qzz76s9Win3GWfo1vedfDLv_ho">  Arthur Conan Doyle（1892）原著，朱志煒、邱偉欣、紀品志（2024）翻譯，《福摩思探偵案精選》。台北：前衛出版。</a>
+        </article>
+
+        <article class="pub-item">
+         <a href="https://www.books.com.tw/products/0010894233?srsltid=AfmBOopDM8JocHtg0xt5V_ghjLOj0oiu0qipQTrLMXzfE0qjZSTkV9Ph"> Brüder Grimm（1843）原著，邱偉欣（2021）翻譯，《你無聽--過ê格林童話》。台北：前衛出版。</a>
+        </article>
+
+      </div>
+    </section>
+
   </div>
 </section>
 </main>

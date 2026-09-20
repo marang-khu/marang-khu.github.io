@@ -10,11 +10,37 @@
 <header class="site-header">
   <div class="site-header__inner">
     <a class="brand" href="/">Marang Khu</a>
+
     <nav class="nav" aria-label="主要導覽">
-      <a href="/個人/">個人</a>
-      <a href="/個人/學歷/">學歷</a>
-      <a href="/個人/經歷/">經歷</a>
-      <a href="/個人/著作/">著作</a>
+      <div class="nav-item">
+        <button class="nav-button" type="button" aria-expanded="false">個人</button>
+        <ul class="dropdown-menu">
+          <li><a href="/個人/">個人介紹</a></li>
+          <li><a href="/個人/學歷/">學歷</a></li>
+          <li><a href="/個人/經歷/">經歷</a></li>
+
+          <li class="dropdown-submenu">
+            <button class="dropdown-submenu-button" type="button" aria-expanded="false">著作</button>
+            <ul class="dropdown-submenu-menu">
+              <li><a href="/個人/著作/">著作總覽</a></li>
+              <li><a href="/個人/著作/學術著作/">學術著作</a></li>
+              <li><a href="/個人/著作/創作/">文學創作</a></li>
+            </ul>
+          </li>
+
+          <li><a href="/個人/教學/">教學</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-item">
+        <button class="nav-button" type="button" aria-expanded="false">著作</button>
+        <ul class="dropdown-menu">
+          <li><a href="/個人/著作/">著作總覽</a></li>
+          <li><a href="/個人/著作/學術著作/">學術著作</a></li>
+          <li><a href="/個人/著作/創作/">文學創作</a></li>
+        </ul>
+      </div>
+
       <a href="/個人/教學/">教學</a>
       <a href="/研究室/當teh工程/">研究</a>
     </nav>

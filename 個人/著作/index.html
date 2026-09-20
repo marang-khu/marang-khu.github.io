@@ -10,11 +10,37 @@
 <header class="site-header">
   <div class="site-header__inner">
     <a class="brand" href="/">Marang Khu</a>
+
     <nav class="nav" aria-label="主要導覽">
-      <a href="/個人/">個人</a>
-      <a href="/個人/學歷/">學歷</a>
-      <a href="/個人/經歷/">經歷</a>
-      <a href="/個人/著作/">著作</a>
+      <div class="nav-item">
+        <button class="nav-button" type="button" aria-expanded="false">個人</button>
+        <ul class="dropdown-menu">
+          <li><a href="/個人/">個人介紹</a></li>
+          <li><a href="/個人/學歷/">學歷</a></li>
+          <li><a href="/個人/經歷/">經歷</a></li>
+
+          <li class="dropdown-submenu">
+            <button class="dropdown-submenu-button" type="button" aria-expanded="false">著作</button>
+            <ul class="dropdown-submenu-menu">
+              <li><a href="/個人/著作/">著作總覽</a></li>
+              <li><a href="/個人/著作/學術著作/">學術著作</a></li>
+              <li><a href="/個人/著作/創作/">文學創作</a></li>
+            </ul>
+          </li>
+
+          <li><a href="/個人/教學/">教學</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-item">
+        <button class="nav-button" type="button" aria-expanded="false">著作</button>
+        <ul class="dropdown-menu">
+          <li><a href="/個人/著作/">著作總覽</a></li>
+          <li><a href="/個人/著作/學術著作/">學術著作</a></li>
+          <li><a href="/個人/著作/創作/">文學創作</a></li>
+        </ul>
+      </div>
+
       <a href="/個人/教學/">教學</a>
       <a href="/研究室/當teh工程/">研究</a>
     </nav>
@@ -23,8 +49,15 @@
 <main>
 <section class="page-shell">
   <h1>著作</h1>
-  <div class="placeholder">
-    已保留 Google Sites 原有網址階層。此頁的原始內容目前無法由公開抓取端完整讀取，尚未改寫或臆造內容。
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:28px;">
+    <a href="/個人/著作/學術著作/" style="display:block;padding:28px;text-decoration:none;color:#1f3b57;background:#f7fbf2;border:1px solid #dfe8d6;border-left:6px solid #8fbf6a;border-radius:18px;box-shadow:0 6px 18px rgba(40,40,40,.05);">
+      <div style="font-size:23px;font-weight:800;">學術著作</div>
+      <div style="margin-top:8px;color:#6f6a62;">Academic Publications</div>
+    </a>
+    <a href="/個人/著作/創作/" style="display:block;padding:28px;text-decoration:none;color:#1f3b57;background:#f7f9fb;border:1px solid #dde4e8;border-left:6px solid #7895a8;border-radius:18px;box-shadow:0 6px 18px rgba(40,40,40,.05);">
+      <div style="font-size:23px;font-weight:800;">文學創作</div>
+      <div style="margin-top:8px;color:#6f6a62;">Literary Works</div>
+    </a>
   </div>
 </section>
 </main>

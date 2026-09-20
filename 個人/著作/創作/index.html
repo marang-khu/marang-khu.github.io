@@ -3,29 +3,388 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>創作｜Marang Khu</title>
+  <title>文學創作｜Marang Khu</title>
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 <header class="site-header">
   <div class="site-header__inner">
     <a class="brand" href="/">Marang Khu</a>
+
     <nav class="nav" aria-label="主要導覽">
-      <a href="/個人/">個人</a>
-      <a href="/個人/學歷/">學歷</a>
-      <a href="/個人/經歷/">經歷</a>
-      <a href="/個人/著作/">著作</a>
+      <div class="nav-item">
+        <button class="nav-button" type="button" aria-expanded="false">個人</button>
+        <ul class="dropdown-menu">
+          <li><a href="/個人/">個人介紹</a></li>
+          <li><a href="/個人/學歷/">學歷</a></li>
+          <li><a href="/個人/經歷/">經歷</a></li>
+
+          <li class="dropdown-submenu">
+            <button class="dropdown-submenu-button" type="button" aria-expanded="false">著作</button>
+            <ul class="dropdown-submenu-menu">
+              <li><a href="/個人/著作/">著作總覽</a></li>
+              <li><a href="/個人/著作/學術著作/">學術著作</a></li>
+              <li><a href="/個人/著作/創作/">文學創作</a></li>
+            </ul>
+          </li>
+
+          <li><a href="/個人/教學/">教學</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-item">
+        <button class="nav-button" type="button" aria-expanded="false">著作</button>
+        <ul class="dropdown-menu">
+          <li><a href="/個人/著作/">著作總覽</a></li>
+          <li><a href="/個人/著作/學術著作/">學術著作</a></li>
+          <li><a href="/個人/著作/創作/">文學創作</a></li>
+        </ul>
+      </div>
+
       <a href="/個人/教學/">教學</a>
       <a href="/研究室/當teh工程/">研究</a>
     </nav>
   </div>
 </header>
 <main>
-<section class="page-shell">
-  <h1>創作</h1>
-  <div class="placeholder">
-    已保留 Google Sites 原有網址階層。此頁的原始內容目前無法由公開抓取端完整讀取，尚未改寫或臆造內容。
+<section class="pub-section">
+  <style>
+    .pub-section {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 28px;
+      font-family: 'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;
+      color: #2f2a24;
+      background: linear-gradient(135deg, #faf6ed 0%, #ffffff 55%, #f3f7ef 100%);
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(60, 45, 30, 0.10);
+    }
+
+    .pub-label {
+      display: inline-block;
+      padding: 6px 14px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: #5d7442;
+      background: #eef5e6;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .pub-section h2 {
+      margin: 0 0 14px 0;
+      font-size: 34px;
+      line-height: 1.25;
+      color: #1f3b57;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .pub-intro {
+      max-width: 780px;
+      margin: 0 0 28px 0;
+      font-size: 17px;
+      line-height: 1.9;
+      color: #5f5a52;
+    }
+
+    .pub-section input[type="radio"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    #pub-all:focus-visible ~ .pub-tabs label[for="pub-all"],
+    #pub-novel:focus-visible ~ .pub-tabs label[for="pub-novel"],
+    #pub-essay:focus-visible ~ .pub-tabs label[for="pub-essay"] {
+      outline: 3px solid #1f5f8b;
+      outline-offset: 3px;
+    }
+
+    .pub-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0 0 34px 0;
+    }
+
+    .pub-tabs label {
+      border: 1px solid #d8ccb7;
+      background: rgba(255,255,255,0.86);
+      color: #1f3b57;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(40, 40, 40, 0.05);
+    }
+
+    .pub-tabs label:hover {
+      transform: translateY(-1px);
+      background: #eef5e6;
+      border-color: #8fbf6a;
+    }
+
+    #pub-all:checked ~ .pub-tabs label[for="pub-all"],
+    #pub-novel:checked ~ .pub-tabs label[for="pub-novel"],
+    #pub-essay:checked ~ .pub-tabs label[for="pub-essay"] {
+      color: #ffffff;
+      background: #1f3b57;
+      border-color: #1f3b57;
+    }
+
+    .pub-category {
+      margin-bottom: 34px;
+    }
+
+    .pub-category-title {
+      margin: 0 0 18px 0;
+      padding: 0 0 0 16px;
+      font-size: 24px;
+      line-height: 1.4;
+      color: #1f3b57;
+      font-weight: 800;
+      border-left: 6px solid #8fbf6a;
+    }
+
+    .pub-category-title span {
+      display: block;
+      margin-top: 4px;
+      font-size: 14px;
+      color: #7a746b;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .pub-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .pub-item {
+      padding: 22px 24px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid #e6dccb;
+      border-left: 6px solid #bfa36a;
+      border-radius: 18px;
+      box-shadow: 0 6px 18px rgba(40, 40, 40, 0.06);
+      line-height: 1.85;
+      font-size: 16px;
+      color: #2f2a24;
+    }
+
+    .pub-item.cat-novel {
+      border-left-color: #8fbf6a;
+    }
+
+    .pub-item.cat-essay {
+      border-left-color: #7895a8;
+    }
+
+    .pub-preface {
+      margin: -6px 0 18px 0;
+    }
+
+    .pub-preface a {
+      color: #1f5f8b;
+      text-underline-offset: 3px;
+    }
+
+    .pub-item a {
+      color: #1f5f8b;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .pub-item a:hover {
+      text-decoration: underline;
+    }
+
+    #pub-novel:checked ~ .pub-content .pub-item:not(.cat-novel),
+    #pub-essay:checked ~ .pub-content .pub-item:not(.cat-essay) {
+      display: none;
+    }
+
+    @media (max-width: 640px) {
+      .pub-section {
+        padding: 38px 18px;
+      }
+
+      .pub-section h2 {
+        font-size: 30px;
+      }
+
+      .pub-tabs {
+        gap: 8px;
+      }
+
+      .pub-tabs label {
+        padding: 9px 14px;
+        font-size: 14px;
+      }
+
+      .pub-category-title {
+        font-size: 22px;
+      }
+
+      .pub-item {
+        padding: 18px 18px;
+        font-size: 15px;
+      }
+    }
+  </style>
+
+  <input type="radio" name="pub-filter" id="pub-all" aria-label="全部" checked>
+  <input type="radio" name="pub-filter" id="pub-novel" aria-label="台語小說">
+  <input type="radio" name="pub-filter" id="pub-essay" aria-label="台語散文">
+
+  <div class="pub-tabs">
+    <label for="pub-all">全部</label>
+    <label for="pub-novel">台語小說</label>
+    <label for="pub-essay">台語散文</label>
   </div>
+
+  <div class="pub-content">
+    <section class="pub-category">
+      <div class="pub-list">
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/XcDUhsVOQquWeXikzuEK5A" target="_blank" rel="noopener noreferrer">他家的二二八</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/09sUdtMqRJmn_2bNLtuQmg" target="_blank" rel="noopener noreferrer">女學生刣人事件</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/YuziCZasSRCsjV4FRXIS6Q" target="_blank" rel="noopener noreferrer">大善人</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/eDGZ49QURiiPg1PnPvsUHw" target="_blank" rel="noopener noreferrer">3080</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/Wmk4QgV4Q3WDrFdQwoeybQ" target="_blank" rel="noopener noreferrer">蔣介石</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/cXm04nPsRFGGAsmWg6j7-w" target="_blank" rel="noopener noreferrer">永遠ê陷眠</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/2Ascji3dRAOOxcoGBe2o8w" target="_blank" rel="noopener noreferrer">再會啦！香港！</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/4_wIm1Q4RM65ysHloWAiSA" target="_blank" rel="noopener noreferrer">飼羊仔ê囡仔兄</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/x9OTTzElS8eb9FQKn2NYRw" target="_blank" rel="noopener noreferrer">君の名</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/pNteolmKQySq-Kz-_LAWPA" target="_blank" rel="noopener noreferrer">罪</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/uR8bIovUS7aN-rpMkOwj7Q" target="_blank" rel="noopener noreferrer">蚵仔煎</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/5sEfi5grSIuSZw6FBM17KA" target="_blank" rel="noopener noreferrer">病</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/-7WWALPZSumqJbuyVLbQmQ" target="_blank" rel="noopener noreferrer">夢湖</a>
+        </article>
+        <article class="pub-item cat-novel">
+          <a href="https://hackmd.io/_3fJRwfPT3S1A8nbkLI10A" target="_blank" rel="noopener noreferrer">事變</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/frZQJC6wTfuKiHF388N8Lw" target="_blank" rel="noopener noreferrer">數念</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/I1TLD_XUR8WPKSnX8Zyw0w" target="_blank" rel="noopener noreferrer">大同仔封</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/z7CK4pXZRHWsT01IfRyTDA" target="_blank" rel="noopener noreferrer">疏開</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/AMbx7fz2Tw2u6uZz6x4fZg" target="_blank" rel="noopener noreferrer">病毒ê起源</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/HWBnSAfPT_2KcX7jT2rFAQ" target="_blank" rel="noopener noreferrer">少年巴根性</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/_axjxfZMSlWn4Lmhj_zutQ" target="_blank" rel="noopener noreferrer">Cassava cake</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/4DU97q4JQ4WvyF-Q-6CzHw" target="_blank" rel="noopener noreferrer">狗佮人</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/YYNU3O0MT7KZRElMMAUhLg" target="_blank" rel="noopener noreferrer">墨賊佮花枝</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/E9PJWvpaQIKtBcPwattdfQ" target="_blank" rel="noopener noreferrer">慣勢</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/mxTTMEqpS-qKAcvbfGQZGA" target="_blank" rel="noopener noreferrer">書寫烏面撈飛</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/auh3pofJR566Q4hrJCVrZg" target="_blank" rel="noopener noreferrer">《東番記》kám是台灣古典散文？</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/mIYPtGFPRKixnQRcVifbJQ" target="_blank" rel="noopener noreferrer">生物ê語言學</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/dFqQgymNSoitcFCRAIyopg" target="_blank" rel="noopener noreferrer">多語人ê特色</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/SLvHdYYNStSZpTaE7cKZLw" target="_blank" rel="noopener noreferrer">觀古鑑今</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/6TU7IjqERleO8AXa7XF7Sg" target="_blank" rel="noopener noreferrer">Ùi台語小說發展來看台文通訊 — 論白話字全羅小說到白話字羅漢小說</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/Ckw0kBC7QTG4wZZPIsJBpg" target="_blank" rel="noopener noreferrer">預防射</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/CJ5rS799RlWL2kBbIRD4gg" target="_blank" rel="noopener noreferrer">神經系統</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/0JIRkxrNRmKwaPfuX5ipVQ" target="_blank" rel="noopener noreferrer">免疫系統ê簡介</a>
+        </article>
+        <article class="pub-item cat-essay">
+          <a href="https://hackmd.io/tR9imzJpTKC0ZXDHlCaeNA" target="_blank" rel="noopener noreferrer">DNA</a>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (() => {
+      const section = document.currentScript.closest('.pub-section');
+      const list = section.querySelector('.pub-list');
+      const originalItems = Array.from(list.children);
+      const filters = section.querySelectorAll('input[name="pub-filter"]');
+
+      function arrangeItems() {
+        const items = originalItems.slice();
+        if (section.querySelector('#pub-all').checked) {
+          // Fisher–Yates：混合所有小說與散文，每次切回「全部」重新排列。
+          for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [items[i], items[j]] = [items[j], items[i]];
+          }
+        }
+        // 個別分類恢復原目錄順序；實際篩選由 CSS 處理。
+        const fragment = document.createDocumentFragment();
+        items.forEach(item => fragment.appendChild(item));
+        list.appendChild(fragment);
+      }
+
+      filters.forEach(filter => filter.addEventListener('change', arrangeItems));
+      arrangeItems();
+    })();
+  </script>
 </section>
 </main>
 <footer class="site-footer">Marang Khu</footer>
