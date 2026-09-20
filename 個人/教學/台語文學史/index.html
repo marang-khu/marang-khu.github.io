@@ -435,13 +435,717 @@ main { min-height: 60vh; }
   <span class="visually-hidden">迒領域台語研究室</span>
 </section>
 <main>
-<section class="course-under-construction">
-  <div class="course-label">Teaching</div>
+<section class="tlh-section">
+  <style>
+    .tlh-section {
+      max-width: 1080px;
+      margin: 36px auto 56px;
+      padding: 56px 28px;
+      font-family: 'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;
+      color: #2f2a24;
+      background: linear-gradient(135deg, #faf6ed 0%, #ffffff 55%, #f3f7ef 100%);
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(60,45,30,.10);
+    }
+    .tlh-label {
+      display: inline-block;
+      padding: 6px 14px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: #5d7442;
+      background: #eef5e6;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    .tlh-section > h1 {
+      margin: 0 0 14px;
+      font-size: clamp(30px, 4vw, 40px);
+      line-height: 1.2;
+      color: #1f3b57;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+    .tlh-intro {
+      max-width: 900px;
+      margin: 0 0 30px;
+      font-size: 17px;
+      line-height: 1.95;
+      color: #4f4a43;
+    }
+    .tlh-intro strong { color: #1f3b57; }
+    .tlh-section input[type="radio"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+    .tlh-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 34px;
+    }
+    .tlh-tabs label {
+      border: 1px solid #d8ccb7;
+      background: rgba(255,255,255,.88);
+      color: #1f3b57;
+      padding: 10px 17px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .18s ease;
+      box-shadow: 0 4px 12px rgba(40,40,40,.05);
+    }
+    .tlh-tabs label:hover {
+      transform: translateY(-1px);
+      background: #eef5e6;
+      border-color: #8fbf6a;
+    }
+    #tlh-overview:checked ~ .tlh-tabs label[for="tlh-overview"],
+    #tlh-writing:checked ~ .tlh-tabs label[for="tlh-writing"],
+    #tlh-folk:checked ~ .tlh-tabs label[for="tlh-folk"],
+    #tlh-chapbook:checked ~ .tlh-tabs label[for="tlh-chapbook"],
+    #tlh-translation:checked ~ .tlh-tabs label[for="tlh-translation"],
+    #tlh-poetry:checked ~ .tlh-tabs label[for="tlh-poetry"],
+    #tlh-fiction:checked ~ .tlh-tabs label[for="tlh-fiction"],
+    #tlh-prose:checked ~ .tlh-tabs label[for="tlh-prose"],
+    #tlh-movements:checked ~ .tlh-tabs label[for="tlh-movements"] {
+      color: #fff;
+      background: #1f3b57;
+      border-color: #1f3b57;
+    }
+    .tlh-panel { display: none; }
+    #tlh-overview:checked ~ .tlh-content .panel-overview,
+    #tlh-writing:checked ~ .tlh-content .panel-writing,
+    #tlh-folk:checked ~ .tlh-content .panel-folk,
+    #tlh-chapbook:checked ~ .tlh-content .panel-chapbook,
+    #tlh-translation:checked ~ .tlh-content .panel-translation,
+    #tlh-poetry:checked ~ .tlh-content .panel-poetry,
+    #tlh-fiction:checked ~ .tlh-content .panel-fiction,
+    #tlh-prose:checked ~ .tlh-content .panel-prose,
+    #tlh-movements:checked ~ .tlh-content .panel-movements { display: block; }
+    .tlh-title {
+      margin: 0 0 18px;
+      padding-left: 16px;
+      font-size: 27px;
+      line-height: 1.4;
+      color: #1f3b57;
+      font-weight: 800;
+      border-left: 6px solid #8fbf6a;
+    }
+    .tlh-title span {
+      display: block;
+      margin-top: 3px;
+      color: #7a746b;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .4px;
+    }
+    .tlh-subhead {
+      margin: 30px 0 14px;
+      font-size: 20px;
+      line-height: 1.5;
+      color: #1f3b57;
+      font-weight: 800;
+    }
+    .tlh-lead {
+      margin: 0 0 20px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: #f7faf3;
+      border: 1px solid #dfe8d6;
+      color: #3f4939;
+      line-height: 1.9;
+      font-size: 16px;
+    }
+    .tlh-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .tlh-card {
+      padding: 22px 24px;
+      background: rgba(255,255,255,.93);
+      border: 1px solid #e6dccb;
+      border-left: 6px solid #bfa36a;
+      border-radius: 18px;
+      box-shadow: 0 6px 18px rgba(40,40,40,.06);
+      line-height: 1.85;
+      font-size: 16px;
+    }
+    .tlh-card.green { border-left-color: #8fbf6a; }
+    .tlh-card.blue { border-left-color: #7895a8; }
+    .tlh-card.orange { border-left-color: #c98f67; }
+    .tlh-card.purple { border-left-color: #8f7bb8; }
+    .tlh-card h3 {
+      margin: 0 0 10px;
+      color: #1f3b57;
+      font-size: 20px;
+      line-height: 1.45;
+    }
+    .tlh-card p { margin: 0 0 10px; }
+    .tlh-card p:last-child { margin-bottom: 0; }
+    .tlh-card ul, .tlh-card ol { margin: 8px 0 0; padding-left: 1.35em; }
+    .tlh-card li { margin: 6px 0; }
+    .tlh-quote {
+      margin: 14px 0 0;
+      padding: 14px 16px;
+      background: #fbfaf7;
+      border-left: 4px solid #bfa36a;
+      border-radius: 0 12px 12px 0;
+      color: #49443e;
+      line-height: 1.9;
+    }
+    .tlh-timeline {
+      display: grid;
+      grid-template-columns: 115px 1fr;
+      gap: 0 18px;
+      margin: 16px 0 6px;
+    }
+    .tlh-year, .tlh-event {
+      padding: 11px 0;
+      border-bottom: 1px solid #eee7dc;
+    }
+    .tlh-year {
+      color: #6b8548;
+      font-weight: 800;
+      text-align: right;
+    }
+    .tlh-event { line-height: 1.8; }
+    .tlh-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin: 14px 0 4px;
+    }
+    .tlh-flow span {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: #eef5e6;
+      color: #4f6740;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .tlh-flow b { color: #9a7c36; }
+    .tlh-table-wrap {
+      overflow-x: auto;
+      margin: 12px 0 4px;
+      border: 1px solid #e6dccb;
+      border-radius: 14px;
+      background: #fff;
+    }
+    .tlh-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .tlh-table th, .tlh-table td {
+      padding: 11px 13px;
+      border-bottom: 1px solid #eee7dc;
+      text-align: left;
+      vertical-align: top;
+    }
+    .tlh-table th {
+      background: #f4f7f1;
+      color: #1f3b57;
+      font-weight: 800;
+    }
+    .tlh-table tr:last-child td { border-bottom: 0; }
+    @media (max-width: 760px) {
+      .tlh-section { margin: 20px 14px 40px; padding: 38px 18px; }
+      .tlh-tabs { gap: 8px; }
+      .tlh-tabs label { padding: 9px 13px; font-size: 14px; }
+      .tlh-grid { grid-template-columns: 1fr; }
+      .tlh-title { font-size: 23px; }
+      .tlh-card { padding: 18px; font-size: 15px; }
+      .tlh-timeline { grid-template-columns: 86px 1fr; gap: 0 12px; }
+    }
+  </style>
+
+  <div class="tlh-label">Teaching · 台語文學史</div>
   <h1>台語文學史</h1>
-  <div class="construction-animation">
-    <img src="data:image/gif;base64,R0lGODlhMAIEAYcAAP////7+/v39/vz9/fz8/Pr6+/n6+vn5+Pr48/n38vb3+Pj28ff18Pb07/X19fP09vXz7vPz8vLz9fHz9PXy7fTy7fPy8fPx7PLw6vHx8O7w8vDv7vHv6e3w8vDu6fDt6O7t6+/s5+3r5u3r5fDq3+zq5efq7evp5Ovo4+rn4unn4ebl4+fl4Ofl3+bk3+Tn6+Lm6eDk6OXj3uXi3eTi3OTh3OLh4N/j5+Df3eHf2d3d3Obcy97c1tfc4eXbyuPZyN7b1dzZ1OHYx9va2NvY09rX0d/VxdvSwtfV0NbTzdXU0dXT0dXTzdTSzdLY3dHX3c/V28zS2cvS2NnQwNTRy9PQy9LRztLPy9HPzdfNvdXLvNPKu8/Mx83KxMnP1sjP1czJw9DHuMvIwsrHwcnGwMjFv8zDtMfFwcbDvb/Hz73FzrvEzMrCs8PAurrCy8K/u8K/uMS9scC9uL+8ucC8tr66s7u5tbjByra/yLO9xrK8xb+3qbu3sb61p7q3sbm1r7e0rq64wqy3way2wLazrLWyrrSyrrSxrLevobOwq7Ctpq+rpq6rpK2po62onqm0v6Wwu6Ouup6qt52qtqilnpeksZaksb+jaqihl6Wim6SgmqOgm6OfmaKfmaKel6Gdl5Ogro+dq6Kck5+blJ2Zkp6XjZuYkZmVj5mTiZWSjI6cqoiXpoaVpIOTooGRoZWQh5OPiZKOiJGNh5KLgJCLhI+LhI2Kgo2IgIuHgYuHgIuGfYmFfYiEfomDeoeBd32NnXqLnHeImXOFloaCe4aBeoWAeW6AkoN/d2x/kWt/YIJ9dYF9doF8dH96c315cX54b314cX14cH13b3l0bHdyanZxaXZxaHVwaHRwaHRvZ3NuZ3NuZnJtZXJtZHFsZHBrY29qYmZ5jV5yhltvhFlugldsgVFnfU9le01jeUphd0lgd0hfdkZddD5WbjdQaTFLZC9JYy1HYipFYCpEXydCXSZBXCVAXCM+WiE9WB87VwAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQADAAAACwAAAAAMAIEAQAI/wARCBxIsKDBgwgTKlzIsKHDhxAjSpxIsaLFixgzatzIsaPHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fPn0CDCh1KtKjRo0iTKl3KtKnTp1CjSp1KtarVq1izat3KtavXr2DDih1LtqzZs2jTql3Ltq3bt3Djyp1Lt67du3jz6t3Lt6/fv4ADCx5MuLDhw4gTK17MuLHjx5AjS55MubLly5gza97MubPnz6BDix5td4fp06hTq17NurXr17Bjy55Nu7bt27hz697Nu7fv38CDC2c9dbjx48iTK1/OvLnz59CjN1UNoLr169iza9/Ovbv37+DDi/8fT768+fPo06tfz769+/fw429XnRS1/Pv48+vfz7+///8ABiggakadJuCBCCao4IIMNujgg92dNpSBEFZo4YUYZqjhhvtJ+BOFHIYo4ogklmgigB7yBOKJLLbo4oswmphiTqbFaOONOOaoY3+m6bTijkAGKeSQQs5YU41EJqnkkkyK2ONNSDYp5ZRUVunfkzRFaeWWXHbppXhYyqTll2SWaSaVYcI05plstulmjmm6tOabdNZpJ4dxsjTnnXz26WeCeaq055+EFmoofIGmNOihjDbq6HeJorToo5RW2mikJk1q6aac9okpSZp2KuqoZ346UqikpqpqlaaKhOqqsMb/OmSrIb0q6624xkgrSLbm6uuvI+76Ua/AFmtshcJ6ROyxzDZ7YLIdLevstNTmBy1H0lar7bbrXbtRttyGK2543moE7rjopntduRmdq+674rKLkbvw1lutvBfRa+++zOJrkb78BvyrvxUBLPDBshJMkcEIN5yqwhMx7PDEnEIskcQUZ/yoxRFhrPHHhnIMkccgl+zpDi+RbPLKdIr8kMosx1wqynLuIPPND9PcEsw492ylyw7x7PPQTQLdkNBEJ02k0Qwh/V4yUEct9dRUV2311VhnrfXWXHft9ddghy322GSXbfbZaKNdItMLOc1e2nDHLffcdNdt99145x13sDrr/2lziMmQIPjghBduuOB6z3344osnLjfjkBPueNyRVz453JVHjmzfK7mdXtSZQ3552qEzPjrapTd+utmpH746660XDiHbCnl+ntSxF/562blLvvvYvQ/+O/DBkzC82MWTMDvngv6t4dTJHx929NJ/TX31XV+P/dbJP0h7QraXR7X222dNfvlXn49+1eqvD33x3jOvqPMYsl+8++bfj3/6+u9vf/D+s1r3GvQ9hISPPP/rXQATmLsFjq9/DoRa+/w3QAYV8CAHHI8AIRjBCe7Pg/gDofsq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IopJnpYCcqnggmbGRyaIalYZp5DKEXnihnMa6WWMbyY3Uo9B6lknk3eGuWeOfdaYJ55tAoimc402+GiGixo66JeFlnkokokqeSmfDAFwk5VbRlrhlZtC2SmqnyKaqYotAv8ganemYvgZqWnWOumtlWraKqcLyTpqr7DqumqpqWZ5bK7JjvnqjCbKOmtKuD5ILLTGPqtotj4y2uyZwQrb5a+qauvpn3Z2aym6hKrrK7uYulvst25KO21h3AbqLbnKmssqvKDKiy29ji5rrbH2DpsvlXQC7KrA2xIsqcGULrwmmxKHmvC4DgML8bkspavvuiG3O/K7Jcd78rz8vmWvuNReG3HL4PqLLM1u2swszgXrfHDGybx8L75A74pZtRUXTTGvFq+pmdBDz6e0z0nzPDHVTE/98b8pB7zywFYHLbTCWn89c8flbn0z2v2qvTPbzrr9s9VQRy112LYeLTPINAH/yrCgcNcsd9WBH1Q3x10/bDbfuS3Odd8i/71v4T0PnjXdUJONt9GTIX055VdbrnfTckZ6OK1lS04y5CarjjLrKrvOMuinrp14RKejvvnSo6d+see974518KDnTrTwone+9+ONyw427Xkrb3rmiMPutfNn356247Zbrzj2jPv9O4PGX2z++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx768IdADKIQ/4dIxCIa8YhITKISl8jEJjrxiVCMohSnSMUqWvGKWMyiFrfIxS568YtgDKMYx0jGMprxjGhMoxrXyMY2uvGNcIyjHOdIxzra8Y54zKMe98jHPvrxj4AMpCAHSchCGvKQiEykIhfJyEY68pGQjKQkJ0nJSlrykpjMpCY3yclOevKToAylKEdJylKa8pSoTKUqV8nKVrrylbCMpSxnScta2vKWuMylLmk4jF368pfADOYuySHMYhrzfOI4pjKXycxm/vEOzmRhOKJJTVn2sprYzKY2t8nNbvKPmPpAhjfhN81xfvAS5kynOtfJznYyE5ruzCA8UzLPeIYQnPa0ID7z2f+/cvLznwANqEApqAg7wCwhZ5hDBGSFA1uAAABIQIUFDmqQ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" alt="工程中，內容準備中">
+  <p class="tlh-intro"><strong>台語文學，就是「運動ê文學」。</strong>規部歷史會使ùi文字書寫、歷史發展佮社會運動三ê角度來看：白話字、漢字、臺灣話文佮漢羅按怎發展；作家、作品佮時代按怎互相影響；台語文學又按怎tī制度邊緣建立家己ê作者、讀者、刊物、出版佮文學場域。</p>
+
+  <input type="radio" name="tlh-topic" id="tlh-overview" checked>
+  <input type="radio" name="tlh-topic" id="tlh-writing">
+  <input type="radio" name="tlh-topic" id="tlh-folk">
+  <input type="radio" name="tlh-topic" id="tlh-chapbook">
+  <input type="radio" name="tlh-topic" id="tlh-translation">
+  <input type="radio" name="tlh-topic" id="tlh-poetry">
+  <input type="radio" name="tlh-topic" id="tlh-fiction">
+  <input type="radio" name="tlh-topic" id="tlh-prose">
+  <input type="radio" name="tlh-topic" id="tlh-movements">
+
+  <div class="tlh-tabs" role="tablist" aria-label="台語文學史主題">
+    <label for="tlh-overview">總覽</label>
+    <label for="tlh-writing">書寫系統</label>
+    <label for="tlh-folk">非作家文學</label>
+    <label for="tlh-chapbook">歌仔冊</label>
+    <label for="tlh-translation">翻譯文學</label>
+    <label for="tlh-poetry">台語詩</label>
+    <label for="tlh-fiction">台語小說</label>
+    <label for="tlh-prose">台語散文</label>
+    <label for="tlh-movements">文學運動</label>
+  </div>
+
+  <div class="tlh-content">
+
+    <section class="tlh-panel panel-overview">
+      <h2 class="tlh-title">總覽<span>History · Writing · Movement</span></h2>
+      <div class="tlh-lead">Ùi無仝角度來看台語文學史：文字書寫ê角度，白話字 vs 漢字 vs 台語假名；歷史發展ê角度，台語文學ê作家、作品佮in ê社會、時代；社會運動ê角度，臺灣話文運動、海外台語文運動佮母語復振運動。</div>
+
+      <div class="tlh-grid">
+        <article class="tlh-card green">
+          <h3>文學史毋是作品名單</h3>
+          <p>文學史愛處理作者、作品、讀者、出版、媒介、語言、書寫系統佮社會條件之間ê關係。重大事件發生，是毋是有改變啥物？某一个時段ê特殊現象是毋是佮大代誌ê發生有關係？比較大代誌前後，會使看出「大代誌改變啥貨」。</p>
+        </article>
+        <article class="tlh-card blue">
+          <h3>台語文學ê兩條長期書寫路線</h3>
+          <p>漢字、白話字ê使用者是分散tī無仝社會階層。漢字書寫ê使用者範圍khah闊，白話字使用者集中tī教會。M̄-koh，漢字書寫從來毋捌有真正逐家lóng同意ê使用；白話字書寫ê標準化程度khah kôan。</p>
+          <div class="tlh-quote">總講一句：台語文學從到今一直有白話字佮漢字ê書寫 2 條發展ê路線。</div>
+        </article>
+        <article class="tlh-card orange">
+          <h3>文類ê形成</h3>
+          <p>民間故事佮褒歌是作家文學以前ê敘事、韻律資源；歌仔冊kā歌仔寫做字，建立閱讀佮表演市場；翻譯、詩、小說、散文koh逐步擴張台語會使承擔ê知識、情感佮美學功能。</p>
+        </article>
+        <article class="tlh-card purple">
+          <h3>斷裂佮重建</h3>
+          <p>台語文學ê歷史毋是直線發展。殖民統治、國語政策、戒嚴、出版制度佮教育政策攏會造成斷裂；無仝時代ê作家佮社群，koh透過教會、民間、海外、刊物、社團、教育、翻譯佮創作重新接線。</p>
+        </article>
+      </div>
+
+      <h3 class="tlh-subhead">一目了然：台語文學史ê骨架</h3>
+      <div class="tlh-card green">
+        <div class="tlh-timeline">
+          <div class="tlh-year">1853</div><div class="tlh-event">《天路歷程》白話字長篇翻譯。白話字書面文學ùi宗教實用，行向長篇敘事文學ê實踐。</div>
+          <div class="tlh-year">1885</div><div class="tlh-event">《台灣府城教會報》創刊。印刷、流通、作者發表、讀者閱讀ê市場形成，白話字散文、翻譯、小說佮詩有穩定ê發表所在。</div>
+          <div class="tlh-year">1916</div><div class="tlh-event">黃塗活版所加入歌仔冊市場，台灣家己出版歌仔冊ê時代開始。</div>
+          <div class="tlh-year">1920s</div><div class="tlh-event">台灣本地信徒ê文化生產增加；民間文學整理、新文學思考、白話字翻譯佮小說創作相連紲發展。</div>
+          <div class="tlh-year">1930s</div><div class="tlh-event">臺灣話文運動公開處理「beh án-chóaⁿ用漢字寫台語」；歌仔冊在地化、漢字台語小說佮新詩實驗同齊發展。</div>
+          <div class="tlh-year">1945後</div><div class="tlh-event">語言政策重新改變文學生產環境。白話字出版猶原延續，但是受國語運動佮制度壓迫。</div>
+          <div class="tlh-year">1969後</div><div class="tlh-event">海外台語文運動重新處理台語文字、文學佮認同問題；王育德、日本佮美國ê海外社群形成另外一條主線。</div>
+          <div class="tlh-year">1987後</div><div class="tlh-event">解嚴了後，台語重新行入公共書寫；小說、詩、散文、翻譯、刊物、社團佮出版市場擴張。</div>
+          <div class="tlh-year">1990s</div><div class="tlh-event">《台文通訊》《台文BONG報》、蕃薯詩社、讀者聯誼會、基金會佮學生社團形成長期生產網絡。</div>
+        </div>
+      </div>
+
+      <h3 class="tlh-subhead">文學佮教育</h3>
+      <div class="tlh-grid">
+        <article class="tlh-card green"><h3>思考</h3><p>創作、邏輯、問題化。閱讀台語文本，會使訓練學生看見語言選擇後壁ê權力佮文化意義。</p></article>
+        <article class="tlh-card blue"><h3>感受</h3><p>美感、描述、情緒辨識。台語閱讀產生ê氣味感受，是文本美學ê一部份。</p></article>
+        <article class="tlh-card orange"><h3>語文</h3><p>聽、講、讀、寫。透過文學文本，kā母語ê四項能力一齊飼大。</p></article>
+        <article class="tlh-card purple"><h3>文學場域</h3><p>雜誌刊物是台語創作發表佮thn̂g湠ê平台；作者、讀者、編輯、評論佮出版制度會做伙決定文學會使按怎累積。</p></article>
+      </div>
+    </section>
+
+    <section class="tlh-panel panel-writing">
+      <h2 class="tlh-title">書寫系統<span>白話字 · 漢字 · 臺灣話文 · 漢羅</span></h2>
+      <div class="tlh-lead">書寫系統是一組有規則，用來對應佮表示語音和概念ê符號。台語文學史ê重要問題之一，就是「beh用啥物字寫台語」，koh是寫出來了後，啥人看有、啥人會使學、啥人會使使用。</div>
+
+      <div class="tlh-grid">
+        <article class="tlh-card orange">
+          <h3>漢文佮台語</h3>
+          <p>漢文：發音佮台語白話口音無仝；詞彙佮台語一般詞彙使用有精差；漢字tī漢文內底ê排列組合佮台語無sio-siāng。</p>
+          <div class="tlh-quote">漢文雖然會使用台語讀，毋過tī語言學上，伊佮台語是兩種語言。</div>
+        </article>
+        <article class="tlh-card green">
+          <h3>白話字</h3>
+          <p>白話字tòe宗教傳播來到台灣。1865馬雅各來台，1870左右開始白話字教育；1885《台灣府城教會報》創刊。白話字提供無受漢學教育ê人一條直接用台語讀、寫ê路。</p>
+          <p>白話字書寫ê標準化程度khah kôan，mā形成長期ê小說、散文、詩、翻譯傳統。</p>
+        </article>
+        <article class="tlh-card blue">
+          <h3>漢字台語</h3>
+          <p>早期台語漢字書寫會看著tī劇本、歌仔冊、台日對譯教材。歌仔冊ê漢字通常m̄是讀冊人ê正統漢字，卻是一般人讀、唱、表演台語ê實際工具。</p>
+          <p>1930年代ê臺灣話文論戰，kā這款本底就存在ê台語漢字書寫推入理論、文學佮標準化ê討論。</p>
+        </article>
+        <article class="tlh-card purple">
+          <h3>漢羅濫寫</h3>
+          <p>海外台語文運動重新處理台語beh án-chóaⁿ記錄ê問題，漢字佮羅馬字開始有系統做伙使用。到《台文通訊》、後來ê刊物佮創作，漢羅濫寫成做現代台語文學上常見ê形式。</p>
+          <p>漢羅毋是妥協，是白話字佮漢字兩條歷史傳統匯流ê結果。</p>
+        </article>
+      </div>
+
+      <h3 class="tlh-subhead">用白話字學漢文：兩套語文ê分工</h3>
+      <div class="tlh-card green">
+        <p>劉青雲著《羅華改造統一書翰文》，1925年發行。伊用白話字標注漢字tī漢文內底ê發音，koh加上用台語（白話字）註解漢文ê意思。</p>
+        <p>透過頂面ê例thang知：漢文是一般大眾無熟--ê；大眾會使透過白話字學台語書寫mā會使學漢文發音；大眾會使透過台語解說理解漢文ê使用。</p>
+      </div>
+
+      <h3 class="tlh-subhead">言文一致：我手寫我口</h3>
+      <div class="tlh-card blue">
+        <p>台灣新文學運動ê問題意識，是beh開創會使普及、會使教學、會使承chih新時代理念ê書面語。目標共識：「言文一致：我手寫我口」。</p>
+        <p>M̄-koh，真正ê問題是：beh按怎做到「言文一致」？若日常講ê是台語，中國白話文真濟所在「能看不能唸」，就會再出現一層語言距離。臺灣話文、白話字佮後來漢羅，lóng是在處理chit个問題。</p>
+      </div>
+    </section>
+
+    <section class="tlh-panel panel-folk">
+      <h2 class="tlh-title">非作家文學<span>民間故事 · 褒歌</span></h2>
+      <div class="tlh-lead">民間故事是有機現象（organic phenomenon）。民間故事是文化ê一部份，mā是語言ê表現。伊佇猶未有固定ê作者、固定ê文本、印刷出版制度猶未成熟進前，透過社群來講、記持、thn̂g-thòaⁿ、變化ê敘事資源，是作家會使吸收ê養分。</div>
+
+      <div class="tlh-grid">
+        <article class="tlh-card green">
+          <h3>民間文學ê有機性</h3>
+          <ul>
+            <li>無固定的版本，故事佇無仝ê講古人、無仝ê所在、無仝ê場合，會出現無仝款ê講法。這毋是文本無穩定，是口傳--ê本底就是án-ne。</li>
+            <li>民間故事是用喙講ê藝術mā是一種表演，所以對伊ê了解袂使干焦看記錄落來ê文本。</li>
+            <li>娛樂、教育、佮維持行為規範。講白，民間故事一來予人好聽、好記、好傳；二來mā傳佈價值觀。</li>
+          </ul>
+        </article>
+        <article class="tlh-card blue">
+          <h3>台灣ê民間故事</h3>
+          <p>〈虎姑婆〉、〈邱罔舍〉、〈白賊七〉、〈林道乾〉、〈林投姊〉、〈猴精〉、〈廖添丁〉、〈媽祖婆〉等等，lóng有地方性、表演性佮版本差異。</p>
+          <p>仝一个故事會有無仝主人公、無仝情節；這款變體正是民間故事ê特性。</p>
+        </article>
+      </div>
+
+      <h3 class="tlh-subhead">民間故事ê收集佮整理</h3>
+      <div class="tlh-card orange">
+        <div class="tlh-timeline">
+          <div class="tlh-year">1917</div><div class="tlh-event">平澤平七《臺灣の歌謠と名著物語（臺灣的歌謠和著名故事）》。日本時代日本人ê採集，有殖民統治、語言調查、民俗編目、文化再現ê脈絡。</div>
+          <div class="tlh-year">1924</div><div class="tlh-event">周定山《鄉土文藝初稿》，共收152首歌謠。代表1920年代臺灣新文學運動內底，有人開始kā民間歌謠當做文學佮文化材料保存、整理。</div>
+          <div class="tlh-year">1926</div><div class="tlh-event">張淑子《教化三昧集》，整理俚言、囡仔歌、謎猜，附讀音佮語解。伊ê處理方式有教化性、選擇性、編纂性。</div>
+          <div class="tlh-year">1927</div><div class="tlh-event">鄭坤五〈臺灣國風〉：收錄七字一句、四句一葩ê褒歌，koh加註解佮評論，推捒民間歌謠ê文學地位。</div>
+          <div class="tlh-year">1936</div><div class="tlh-event">李獻璋編《台灣民間文學集》，內容分歌謠佮故事兩大部份，是台灣智識分子第一pái合作做民間文學收集佮整理ê khang-khòe。</div>
+        </div>
+      </div>
+
+      <h3 class="tlh-subhead">褒歌：台語詩歌ê根</h3>
+      <div class="tlh-grid">
+        <article class="tlh-card green">
+          <h3>結構</h3>
+          <p>褒歌毋是固定文本。內容無固定，愛情、生活感慨、婚姻、勞動攏會使；七字四句佔多數，通常一个韻thàng頭尾。</p>
+        </article>
+        <article class="tlh-card blue">
+          <h3>鄭坤五ê「臺灣國風」</h3>
+          <div class="tlh-quote">「臺灣國風者，乃通俗採茶褒歌也，係臺青年男女間，自鳴天籟，一種白話詩文。」</div>
+          <p>鄭坤五是第一ê kā褒歌當做文學koh做文學性分析ê人。</p>
+        </article>
+      </div>
+
+      <div class="tlh-flow"><span>口碑文學</span><b>→</b><span>褒歌</span><b>→</b><span>歌仔冊</span><b>→</b><span>台語詩、小說ê文學資源</span></div>
+    </section>
+
+    <section class="tlh-panel panel-chapbook">
+      <h2 class="tlh-title">歌仔冊<span>歌仔 · 歌仔冊 · 歌仔先</span></h2>
+      <div class="tlh-lead">歌仔冊就是kā歌仔寫做字ê書面文本，是唸歌表演ê文本。歌仔冊是一般人會使買來家己看--ê。歌仔是用編--ê。歌仔是韻文；褒歌通常是一个韻thàng頭尾，歌仔會使轉換無仝韻跤。</div>
+
+      <div class="tlh-grid">
+        <article class="tlh-card green">
+          <h3>文化佮文學價值</h3>
+          <p>歌仔ê內容包含：愛情，親情，時事，歷史，勸世，風俗，儀式，蟲thōa魚鳥，花草樹木……等等，會使講歌仔是台灣文化資料庫。</p>
+          <p>歌仔冊是書面語──長篇敘事抒情；褒歌因為是口語，臨時mā會使演唱，通常袂是長篇。</p>
+        </article>
+        <article class="tlh-card blue">
+          <h3>歌仔冊ê路用</h3>
+          <ul>
+            <li>提供基層民眾（無錢去學仔）bat字ê管道。</li>
+            <li>提供民眾娛樂，內容通常有故事性。</li>
+            <li>表現台語韻律特色：四字、五字、六字、七字ê韻文。</li>
+            <li>反應社會歷史：歷史記持、社會現實。</li>
+          </ul>
+        </article>
+      </div>
+
+      <h3 class="tlh-subhead">台灣歌仔冊ê發展</h3>
+      <div class="tlh-table-wrap">
+        <table class="tlh-table">
+          <thead><tr><th>時期</th><th>發展</th><th>重點</th></tr></thead>
+          <tbody>
+            <tr><td>清國時期</td><td>1826左右就有歌仔冊ê記錄出現；歌仔冊代先tī清國南爿時行，綴移民入來台灣。</td><td>傳入、接受。</td></tr>
+            <tr><td>1895–1915</td><td>佇台流通ê版本多數猶是外來本、翻刻本，主題以中國傳統故事、勸世、才子佳人、歷史演義等為主。</td><td>台灣本地ê特色猶無啥物影跡。</td></tr>
+            <tr><td>1916–1945</td><td>1916年後黃塗活版所加入市場，大量刊印；1930年代本地作者、出版者佮題材明顯增長。</td><td>出現日語借詞、台灣地名、台灣物產、地方事件、新時代科技、近代社會議題；歌仔冊快速「台灣化」。</td></tr>
+            <tr><td>1946–1970</td><td>竹林書局是長時段ê主要出版者，翻印、改編、調整腔口佮詞彙。</td><td>到1970年代，綴電視、新興娛樂、社會轉變、台語禁止，市場沓沓仔蔫去。</td></tr>
+            <tr><td>解嚴後</td><td>新創作者、新書寫佮表演、數位保存、文化遺產。</td><td>市場縮小，傳承並無斷。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="tlh-subhead">歌仔冊ê在地化</h3>
+      <div class="tlh-card orange">
+        <p>台灣歌仔冊一直lóng有受著中國ê影響，發生明顯變化ê時間大約是tī 1930年左右。受中國影響會使分做3个方面：直接來自中國進口；本地出版社翻印中國歌仔冊；採用中國ê傳統故事發展歌仔冊。</p>
+        <p>1920s尾期–1930s開始變化：中國進口受限制，本地歌仔先家己創作，出版社毋免倚靠翻印；台灣在地故事、新聞等變做歌仔題材；台灣歌仔先mā會kā中國來ê故事「二創」。</p>
+      </div>
+
+      <h3 class="tlh-subhead">歌仔先：創作者、表演者、發行人</h3>
+      <div class="tlh-grid">
+        <article class="tlh-card green"><h3>汪思明</h3><p>台灣創作唸歌手第一人。早期四界走跳賣藥仔，1926年開始灌曲盤；創作、演唱，mā被認為佮內台歌仔戲形成有關係。</p></article>
+        <article class="tlh-card blue"><h3>梁松林</h3><p>寫〈新歌廖添丁〉12集、〈特編三伯英臺歌〉55集，歌仔冊專業、「暢銷作家」。Mā有參與灌曲盤，koh有介入直接ê行銷行為。</p></article>
+        <article class="tlh-card orange"><h3>宋文和</h3><p>資料庫收囥伊ê歌仔冊有44本，年代集中tī 1934–1936。伊gâu用現代生活題材：撞球、自動車、茶園、自由戀愛、婚約自主等等。</p></article>
+        <article class="tlh-card purple"><h3>傳承</h3><p>楊秀卿kā早期「唱為主」ê傳統式唸歌，改進做唱佮口白lóng有ê「口白歌仔」形態。洪瑞珍、微笑唸歌團、周定邦、大目睭唸歌團、古意唸歌團等，koh發展出教學、團隊、文資佮青年復振ê無仝路線。</p></article>
+      </div>
+    </section>
+
+    <section class="tlh-panel panel-translation">
+      <h2 class="tlh-title">翻譯文學<span>Translation · Language Expansion</span></h2>
+      <div class="tlh-lead">翻譯m̄是逐字逐句照本翻譯，mā ài考慮著語用、使用慣勢佮文化慣勢等等。Tùi寫作ê人來講，翻譯是一種對寫作ê刺激；tùi讀者來講，翻譯作品是對思考佮語言使用慣勢ê挑戰。</div>
+
+      <div class="tlh-grid">
+        <article class="tlh-card green">
+          <h3>《天路歷程》：長篇敘事ê實踐</h3>
+          <p>The Pilgrim's Progress，John Bunyan著。1853年有厦門話白話字版本，1886–1888《臺灣府城教會報》有連載下本。</p>
+          <p>白話字tòe宗教傳播來到台灣；宗教相關ê冊是第一批翻譯做台語ê著作。《天路歷程》ê意義，是白話字書面文學ùi宗教實用行向長篇敘事文學ê實踐證明。</p>
+        </article>
+        <article class="tlh-card blue">
+          <h3>《語苑》：殖民者ê台語翻譯</h3>
+          <p>1908創刊，讀者主要是tī台灣ê日本警察、法院通譯等基層公務人員。以漢字記錄台語，標注台語片假名佮聲調。</p>
+          <p>《語苑》翻譯ê特色：在地化、簡單化、口語化。翻譯是為語言教育服務，是殖民者ê統治工具，mā保存台語語料。</p>
+        </article>
+        <article class="tlh-card orange">
+          <h3>《教會公報》：台灣人ê白話字文化生產</h3>
+          <p>台語白話字ê翻譯有幾若款：知影源頭佮翻譯者；知影來源毋知翻譯者；來源無清楚，mā無一定知影翻譯者。無一定完全照原文翻，真濟是改寫、節譯、在地化。</p>
+          <p>1920左右台灣社會ê波浪，對應台語白話字翻譯文章快速增加：早期傳教士為主ê文化生產，沓沓仔行向台灣本地信徒ê文化生產。</p>
+        </article>
+        <article class="tlh-card purple">
+          <h3>Í-sap寓言</h3>
+          <p>Í-sap寓言逐篇故事lóng無蓋長，koh趣味，意思chiâⁿ好，koh袂siuⁿ深，足適合做語言學習ê教材。《語苑》予日本人學台語漢字；《教會公報》予台灣人學台語白話字。</p>
+        </article>
+      </div>
+
+      <h3 class="tlh-subhead">譯者陳清忠</h3>
+      <div class="tlh-card green">
+        <p>1895年出世，1916年入日本同志社大學英文系，1921年tī淡水中學校教英文，1925年創辦北部台灣教會公報《芥菜子》。</p>
+        <p>台灣第一位台語專業譯者。集中翻譯年代：1925–1927。翻譯作品總數超過30篇。翻譯來源語：英語為主，mā有日語。</p>
+        <p>重要翻譯包括Í-sap寓言、Dickens《A Christmas Carol》、Maupassant〈A Piece of String〉等。1950年koh翻譯Shakespeare《The Merchant of Venice》第四幕第一景做《Venice ê 生理人》。</p>
+      </div>
+
+      <h3 class="tlh-subhead">解嚴後台語翻譯出版</h3>
+      <div class="tlh-table-wrap">
+        <table class="tlh-table">
+          <thead><tr><th>階段</th><th>代表</th><th>特性</th></tr></thead>
+          <tbody>
+            <tr><td>第一波</td><td>5%台譯計畫（1996–97）、世界童話360、台文1001譯</td><td>文本生產、語言宣示；以白話字、漢羅等形式大量翻譯世界文學，mā有日治台灣作品ê語內翻譯。</td></tr>
+            <tr><td>個人翻譯</td><td>曾正義、李魁賢等</td><td>雙語出版、經典翻譯、個人書寫系統並行。</td></tr>
+            <tr><td>第二波</td><td>2018以後</td><td>譯者群ùi早期ê運動者，轉變做教育現場教師佮翻譯團隊；出版ùi個人、民間社團，轉變kah有完整行銷通路ê出版社合作。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tlh-card blue">
+        <h3>台語翻譯史略說</h3>
+        <div class="tlh-flow"><span>1853–1900左右：宗教傳教翻譯</span><b>→</b><span>1908–1941：《語苑》</span><b>→</b><span>1885–1969：《教會公報》</span><b>→</b><span>1950–1969：戰後零星翻譯</span><b>→</b><span>1987–：解嚴後復興</span></div>
+      </div>
+    </section>
+
+    <section class="tlh-panel panel-poetry">
+      <h2 class="tlh-title">台語詩<span>有「根」ê現代性</span></h2>
+      <div class="tlh-lead">台語現代詩並無佮「舊」──七字仔、漢詩──完全斷裂。白話字詩、漢字台語詩、翻譯詩、中華白話文新詩、日本現代詩形式，lóng tī台灣多語歷史內底交纏。</div>
+
+      <div class="tlh-flow"><span>褒歌・歌仔</span><b>→</b><span>白話字七字仔詩</span><b>→</b><span>翻譯詩・聖詩</span><b>→</b><span>臺灣話文新詩</span><b>→</b><span>戰後現代詩</span></div>
+
+      <h3 class="tlh-subhead">日本時代ê試驗</h3>
+      <div class="tlh-grid">
+        <article class="tlh-card green">
+          <h3>賴和</h3>
+          <p>賴和ê台語詩是ùi七字仔詩開始。伊ê試驗是tī詩內底調整字數、韻跤ê變化，抑是加入漢文、中華白話文ê透濫，beh揣出台灣新文學、台語詩ê方向。</p>
+          <p>〈新樂府〉、〈農民謠〉、〈相思〉、〈冬到新穀收〉、〈呆囝仔──獻給我的小女阿玉〉，顯示伊按怎ùi歌仔韻律行向新詩。</p>
+        </article>
+        <article class="tlh-card blue">
+          <h3>楊華</h3>
+          <p>楊華書寫台語詩ê過程，直接進入現代詩，因為伊直接接觸中華白話文新詩。1932〈心弦〉透濫中華白話文，mā模仿日本ê俳句短詩。</p>
+          <p>不管是啥物款ê路線，賴和佮楊華lóng有佮漢文、中華白話文交纏、透濫；che是反映台灣ê特殊歷史環境。</p>
+        </article>
+      </div>
+
+      <h3 class="tlh-subhead">戰後到當代ê詩人坐標</h3>
+      <div class="tlh-table-wrap">
+        <table class="tlh-table">
+          <thead><tr><th>作家</th><th>位置</th><th>重點</th></tr></thead>
+          <tbody>
+            <tr><td>林宗源</td><td>戰後開創性ê台語詩人</td><td>1960s尾期，tī台語文學ê烏暗期開始寫台語詩；1991年創立第一ê台語社團「番薯詩社」。</td></tr>
+            <tr><td>陳明仁</td><td>解嚴了後ê多產作家</td><td>1985開始台語寫作；詩、小說、散文、劇本並行，《台文BONG報》創辦人之一。</td></tr>
+            <tr><td>陳雷</td><td>海外台語詩人</td><td>寫作以漢羅濫為主；羅馬字堅持白話字。</td></tr>
+            <tr><td>鄭雅怡</td><td>女性觀點</td><td>作品以詩上chē，散文第二chē；以女性觀點關懷女性佮台灣。</td></tr>
+            <tr><td>呂美親</td><td>學院、創作</td><td>台語詩集《落雨彼日》，koh參與台語文運動史料整理。</td></tr>
+            <tr><td>溫若喬</td><td>新語人</td><td>大學二年chiah開始重頭學台語；翻譯Tagore《漂鳥集》，koh持續寫現代台語詩。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tlh-card purple">
+        <h3>台語詩ê歷史佮發展：結論</h3>
+        <p>有「根」ê現代性：tī台語詩ê發展歷史中，「七字仔」是重要ê根源。白話字台語詩是tī特殊社群內底有標準化，視覺上會使直接「看著」台語音韻ê書寫；漢字台語詩ê書寫者主要是有漢學根底ê台灣智識份子，但是漢字台語詩相對欠缺書寫ê標準。</p>
+        <p>不管是陳清忠1925年拍破台語七字仔詩ê翻譯詩，抑是溫若喬2023對Tagore詩ê翻譯，lóng是透過翻譯hō͘台語有閣khah濟氣力展現現代性。當代語言斷裂佮新語人加入詩ê寫作，是危機mā是機會。</p>
+      </div>
+    </section>
+
+    <section class="tlh-panel panel-fiction">
+      <h2 class="tlh-title">台語小說<span>兩个傳統ê匯流佮成熟</span></h2>
+      <div class="tlh-lead">台語小說ê語言表現kan-ta會當是台語。小說內底出現ê其他語言lóng是插花仔、妝娗ê功能nā-tiāⁿ。台語小說ê氣味感受（esthetic feeling）kan-ta會當是台語閱讀所產生--ê。台語閱讀ê過程中產生ê憤怒、驚惶、歡喜、媠氣，就是台語ê氣味感受。</div>
+
+      <h3 class="tlh-subhead">啥物是「台語小說」？</h3>
+      <div class="tlh-grid">
+        <article class="tlh-card green"><h3>語言層</h3><ul><li>主要敘事語言是台語。</li><li>若干焦是台語詞摻佇華語內底，無算台語小說。</li><li>讀者ê台語語感會直接影響理解。</li></ul></article>
+        <article class="tlh-card blue"><h3>文學層</h3><ul><li>人物、情節、笑詼、悲傷攏傍台語句法佮聲口。</li><li>台語毋是裝飾，是情節推進佮人物塑造ê核心。</li><li>台語閱讀產生ê氣味感受，是文本美學ê一部份。</li></ul></article>
+      </div>
+
+      <h3 class="tlh-subhead">日本時代：兩个傳統</h3>
+      <div class="tlh-table-wrap">
+        <table class="tlh-table">
+          <thead><tr><th>傳統</th><th>發展</th><th>重要作品／現象</th></tr></thead>
+          <tbody>
+            <tr><td>白話字（POJ）</td><td>教會教育、報刊、翻譯佮小說形成穩定發表園地。</td><td>〈日本ê怪事〉作為早期小說雛形；胡紹芳〈過年〉、郭頂順〈拯救〉、鄭溪泮《出死線》逐步展現短篇、中篇、長篇敘事。</td></tr>
+            <tr><td>漢字台語</td><td>1930年代臺灣話文運動推動智識份子大量試寫漢字台文。</td><td>賴和〈一個同志ê批信〉、蔡秋桐等，將殖民社會、農村生活、地方聲口直接放入小說。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="tlh-subhead">解嚴了後ê重新起鼓</h3>
+      <div class="tlh-grid">
+        <article class="tlh-card green"><h3>胡民祥〈華府牽猴〉</h3><p>漢字書寫，台美人經驗。胡民祥長期參與海外台語文學運動，kā台美人生活寫入台語小說。</p></article>
+        <article class="tlh-card blue"><h3>宋澤萊〈抗暴的打貓市〉</h3><p>漢字書寫，政治、人權、威權批判。主要作品猶是華語書寫，m̄-koh解嚴前後進入台語政治小說實驗。</p></article>
+        <article class="tlh-card orange"><h3>陳雷〈美麗ê樟腦林〉</h3><p>漢羅濫寫，白色恐怖歷史創傷。作品堅持白話字羅馬字，kā歷史創傷、土地佮族群記憶寫入台語敘事。</p></article>
+        <article class="tlh-card purple"><h3>文學史意義</h3><p>解嚴後台語小說是長期壓制台語文學以後，台語重新對口語、運動語言，行入現代文學創作ê過程。</p></article>
+      </div>
+
+      <h3 class="tlh-subhead">文學基礎設施佮文類成熟</h3>
+      <div class="tlh-card green">
+        <p>台語刊物佮社團tī解嚴以後相連紲ê成立，代表ùi模糊ê「台灣文化」概念行出一條清楚ê路線。1989《風向》《台語文摘》，1991《臺灣教會公報台文天地》《蕃薯詩刊》《台文通訊》，1992《台語風》《台語學生》，後來《海翁台語文學》《台文戰線》等，提供作者穩定發表、讀者閱讀佮評論ê空間。</p>
+        <p>1998《台語小說精選卷》kā無仝時代、刊物、書寫系統中ê台語小說，整理做一个「小說」這款會使hō͘人辨識ê名。伊毋是單純ê作品集，是文學史上ê命名行動。</p>
+      </div>
+
+      <h3 class="tlh-subhead">長篇創作、殖民書寫佮小說技術</h3>
+      <div class="tlh-grid">
+        <article class="tlh-card blue"><h3>陳雷《鄉史補記》</h3><p>25萬字長篇台語小說。第三人稱、地方誌、擬史、檔案想像並用，重構Siraya／平埔記憶，kā主流歷史論述反盤。</p></article>
+        <article class="tlh-card orange"><h3>胡長松《槍聲》</h3><p>二二八、白色恐怖、平埔歷史ê小說集。寫實基底加入魔幻寫實、象徵佮後設技巧；台華對照，自我翻譯ê試驗。故事kā歷史創傷囥轉去高雄具體ê地理佮社會空間。</p></article>
+      </div>
+    </section>
+
+    <section class="tlh-panel panel-prose">
+      <h2 class="tlh-title">台語散文<span>Ùi實用書寫到文學創作</span></h2>
+      <div class="tlh-lead">散文ê風格上倚近日常生活teh講話；所以學生本來就有散文能力。散文phēng講話khah有結構：有段落、有標點、有敘事順序佮論述安排。台語散文ê細項有新聞、報導、批信、日誌、傳記、遊記、科普、議論、抒情、評論。</div>
+
+      <h3 class="tlh-subhead">白話字台語散文ê起步</h3>
+      <div class="tlh-grid">
+        <article class="tlh-card green">
+          <h3>1885：印刷佮報紙ê開始</h3>
+          <p>巴克禮創辦《Tâi-oân-hú-siâⁿ Kàu-hōe-pò》，是台灣第一份報紙，mā是唯一kui-ê用白話字來寫ê報紙。Chit份報紙ê誕生，代表印刷、流通、作者發表、讀者閱讀ê市場已經tī台灣puh穎。</p>
+          <p>早期文類毋但有宗教消息，koh有新聞、批信、傳記、遊記、科普。</p>
+        </article>
+        <article class="tlh-card blue">
+          <h3>1886：〈白話字ê利益〉</h3>
+          <p>《台灣府城教會報》辦徵文。九ê人投稿，馬偕佮甘為霖評審；入選有廈門佮台灣作者。</p>
+          <p>劉茂清ê文章討論：學白話字phēng學漢字khah簡單；適合教會ê人、女人、工人、散良人子弟、無受漢學教育ê人、原住民；將來mā應該發展到天文、地理、數學、物理、國際新聞。</p>
+        </article>
+      </div>
+
+      <h3 class="tlh-subhead">白話字書寫佮伊ê世俗化</h3>
+      <div class="tlh-flow"><span>宗教事務</span><b>→</b><span>生活書寫</span><b>→</b><span>公共知識</span><b>→</b><span>文學創作</span></div>
+      <div class="tlh-grid">
+        <article class="tlh-card orange"><h3>宗教事務</h3><p>聖經翻譯、教會消息、傳道、信仰見證。</p></article>
+        <article class="tlh-card purple"><h3>生活書寫</h3><p>批信、日誌、家庭故事、旅遊記錄。</p></article>
+        <article class="tlh-card green"><h3>公共知識</h3><p>新聞、科學普及、國際消息、醫療衛生。</p></article>
+        <article class="tlh-card blue"><h3>文學創作</h3><p>傳記、抒情、評論、議論散文。</p></article>
+      </div>
+
+      <h3 class="tlh-subhead">地方新聞佮公共論評</h3>
+      <div class="tlh-card orange">
+        <p>1903年曾持衡〈埔社消息〉記錄埔里烏牛欄ê事件。地方新聞寫法：時間、地點、人物、事件清楚交代；結尾koh有明顯ê宗教倫理評論，所以毋是單純新聞報導。</p>
+        <p>這款新聞、報導、評論混合ê寫法，顯示台語散文早期就已經會使負擔公共敘事。</p>
+      </div>
+
+      <h3 class="tlh-subhead">《十項管見》佮戰後延續</h3>
+      <div class="tlh-grid">
+        <article class="tlh-card green"><h3>1925《十項管見》</h3><p>《十項管見》是第一本收囥做一本冊ê台語白話字散文集，mā是台灣第一pái有白話ê散文集出版。M̄是日文，mā m̄是漢文。作者：蔡培火。</p></article>
+        <article class="tlh-card blue"><h3>戰後</h3><p>1954年後《活命ê米糧》《家庭ê朋友》等宗教刊物維持白話字書寫。二十一世紀《海翁台語文學》等長期平台，koh擴大散文、小說、詩、評論等文類ê發表。</p></article>
+      </div>
+
+      <div class="tlh-card purple">
+        <h3>小結論</h3>
+        <p>散文是結構性ê講話。台語散文書寫ê發展ùi白話字開始。白話字雖然是有宗教目的ê使用，m̄-koh台語散文ê發展自然ùi世俗化ê方向去：宗教論述、宗教記錄、一般論述、地方新聞、科學傳播、文學創作。</p>
+      </div>
+    </section>
+
+    <section class="tlh-panel panel-movements">
+      <h2 class="tlh-title">台語文學ê三pái社會運動<span>臺灣話文 · 海外台文 · 母語復振</span></h2>
+      <div class="tlh-lead">共同問題：統治者所主張ê「國語」lóng m̄是台語。台語文學長期tī制度邊緣求生存。每一擺運動lóng是語言、文學、認同ê重組。</div>
+
+      <h3 class="tlh-subhead">第一波：臺灣話文運動</h3>
+      <div class="tlh-grid">
+        <article class="tlh-card green">
+          <h3>言文一致ê追求</h3>
+          <p>1920年代ê台灣智識分子受日本言文一致，mā受中國白話文運動ê影響，認為舊文學無法度「啟蒙民智」，beh開創適合一般人讀ê白話文學。目標共識：「言文一致：我手寫我口」。</p>
+        </article>
+        <article class="tlh-card blue">
+          <h3>對中國白話文ê批判</h3>
+          <p>黃石輝指出，中國白話文tī台灣「不能了解的地方還不少，而且大多數是能看不能唸的」；郭秋生mā指出台灣有「不用台灣特有的言詞不會說明的事象」。</p>
+        </article>
+        <article class="tlh-card orange">
+          <h3>《南音》</h3>
+          <p>1932創刊，刊載漢文、台灣白話漢文、中國白話文、臺灣話文四種書寫。郭秋生創設〈臺灣話文嘗試欄〉，賴和發表〈歸家〉〈惹事〉等臺灣話文小說。</p>
+        </article>
+        <article class="tlh-card purple">
+          <h3>臺灣話文ê核心</h3>
+          <p>臺灣話文是「書面語」，毋是純口語。特殊文體會透濫文言漢文、白話音、訓讀音讀、少量新造字；漢字ê「án-chóaⁿ讀」是核心──多音是資源，mā是障礙。</p>
+        </article>
+      </div>
+
+      <h3 class="tlh-subhead">第二波：海外台語文運動</h3>
+      <div class="tlh-grid">
+        <article class="tlh-card green">
+          <h3>王育德</h3>
+          <p>戰後台語戲劇實驗，hō͘王育德直接拄著「台語beh án-chóaⁿ書寫」ê問題。後來伊流亡日本，研究台灣史、台灣話佮台灣文學。</p>
+          <div class="tlh-quote">「台灣文學是毋是受著啥物咒懺？」──王育德，1946。</div>
+          <p>「咒懺」m̄是神祕ê運命，是殖民佮國家語言政策一再kā文學語言斬斷。</p>
+        </article>
+        <article class="tlh-card blue">
+          <h3>文字實驗</h3>
+          <p>1957王一式、1960s王二式，到1972《台灣語入門》改用白話字。理由：白話字有歷史根源佮使用者基礎，無需要koh發明家己ê台語拼寫法。</p>
+        </article>
+        <article class="tlh-card orange">
+          <h3>美國ê海外社群</h3>
+          <p>1975年台灣語言研究及推廣中心tī紐約成立，發行《台語通訊》；1977年改名台灣語文推廣中心，發行《台灣語文月報》。《台灣語文月報》是頭一份漢羅濫寫ê台語文報紙。</p>
+        </article>
+        <article class="tlh-card purple">
+          <h3>三跤tu</h3>
+          <p>文化（同鄉會）、認同（台語）、政治（建國）相弓。海外台灣人tī公開場合以台語演講，soah無一套穩定ê文字thang記錄；chit个實際問題推動海外台文ê文字工程。</p>
+        </article>
+      </div>
+
+      <h3 class="tlh-subhead">第三波：母語復振運動</h3>
+      <div class="tlh-grid">
+        <article class="tlh-card green">
+          <h3>《台文通訊》：海外佮島內ê橋</h3>
+          <p>1990年Los Angeles台灣同鄉因學台語電腦佮台文寫作成立「台文習作會」。1991年7月《台文通訊》創刊，1992年tī台灣設聯絡處。</p>
+          <p>《台文通訊》是運動雜誌，mā是文學雜誌；讀者聯誼會透過做伙讀、做伙寫、做伙發表，kā刊物變做草根網絡。</p>
+        </article>
+        <article class="tlh-card blue">
+          <h3>《台文BONG報》</h3>
+          <p>1996年李江却台語文教基金會成立，《台文BONG報》創刊。強調「文學，專業，活潑」，是《台文通訊》ê延伸：ùi台語ê語言運動到台語ê文學佮文化釘根。</p>
+        </article>
+        <article class="tlh-card orange">
+          <h3>學生ê台語運動</h3>
+          <p>1988成大台語社、1990台大台灣語文社、1991淡江語言文化研究社、1992清大台語社；1992學生台灣語文促進會成立。學生運動補上學校制度ê空白，mā替後來ê台語教學制度累積人才。</p>
+        </article>
+        <article class="tlh-card purple">
+          <h3>台語文學化</h3>
+          <p>台語文學化m̄是「kā台語寫出來」niâ；koh是建立文類、風格、讀者、投稿制度佮審美標準ê事工。詩、散文、小說、劇本逐步形成會使長期累積ê文學生產。</p>
+        </article>
+      </div>
+
+      <div class="tlh-flow"><span>運動</span><b>→</b><span>組織</span><b>→</b><span>刊物</span><b>→</b><span>教育</span><b>→</b><span>文學場域</span></div>
+
+      <div class="tlh-card green" style="margin-top:18px;">
+        <h3>結語</h3>
+        <p>台語文學就是運動ê文學。透過台語運動（組織、社會網路、動員），台語書寫開始khah普遍，台語作家漸漸出頭，台語文學開始成熟。Phēng白話字台語文佮1930年代ê臺灣話文koh khah多元，豐沛，活潑ê現代台語文學總算出世。</p>
+        <p>現代台語文學是真正筆尾合舌尖ê書面語。雖然現代台語文學chit-má ê勢面上好，台語本身soah已經teh焦蔫。</p>
+      </div>
+    </section>
+
   </div>
 </section>
+
 </main>
 <footer class="site-footer">Marang Khu</footer>
 <script id="mk-site-nav-script">
