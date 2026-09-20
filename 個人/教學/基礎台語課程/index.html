@@ -42,9 +42,9 @@ body{margin:0;font-family:'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;c
 .basic-tabs{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 34px}
 .basic-tabs label{border:1px solid #d8ccb7;background:rgba(255,255,255,.88);color:#1f3b57;padding:10px 17px;border-radius:999px;font-size:15px;font-weight:700;cursor:pointer;transition:all .18s ease;box-shadow:0 4px 12px rgba(40,40,40,.05)}
 .basic-tabs label:hover{transform:translateY(-1px);background:#eef5e6;border-color:#8fbf6a}
-#tab-overview:checked~.basic-tabs label[for=tab-overview],#tab-sound:checked~.basic-tabs label[for=tab-sound],#tab-tone:checked~.basic-tabs label[for=tab-tone],#tab-grammar:checked~.basic-tabs label[for=tab-grammar],#tab-talk:checked~.basic-tabs label[for=tab-talk],#tab-food:checked~.basic-tabs label[for=tab-food],#tab-body:checked~.basic-tabs label[for=tab-body],#tab-symptom:checked~.basic-tabs label[for=tab-symptom],#tab-medical:checked~.basic-tabs label[for=tab-medical]{color:#fff;background:#1f3b57;border-color:#1f3b57}
+#tab-overview:checked~.basic-tabs label[for=tab-overview],#tab-sound:checked~.basic-tabs label[for=tab-sound],#tab-pron:checked~.basic-tabs label[for=tab-pron],#tab-tone:checked~.basic-tabs label[for=tab-tone],#tab-advancedtone:checked~.basic-tabs label[for=tab-advancedtone],#tab-reading:checked~.basic-tabs label[for=tab-reading],#tab-grammar:checked~.basic-tabs label[for=tab-grammar],#tab-talk:checked~.basic-tabs label[for=tab-talk],#tab-food:checked~.basic-tabs label[for=tab-food],#tab-body:checked~.basic-tabs label[for=tab-body],#tab-symptom:checked~.basic-tabs label[for=tab-symptom],#tab-medical:checked~.basic-tabs label[for=tab-medical]{color:#fff;background:#1f3b57;border-color:#1f3b57}
 .basic-panel{display:none}
-#tab-overview:checked~.basic-content .panel-overview,#tab-sound:checked~.basic-content .panel-sound,#tab-tone:checked~.basic-content .panel-tone,#tab-grammar:checked~.basic-content .panel-grammar,#tab-talk:checked~.basic-content .panel-talk,#tab-food:checked~.basic-content .panel-food,#tab-body:checked~.basic-content .panel-body,#tab-symptom:checked~.basic-content .panel-symptom,#tab-medical:checked~.basic-content .panel-medical{display:block}
+#tab-overview:checked~.basic-content .panel-overview,#tab-sound:checked~.basic-content .panel-sound,#tab-pron:checked~.basic-content .panel-pron,#tab-tone:checked~.basic-content .panel-tone,#tab-advancedtone:checked~.basic-content .panel-advancedtone,#tab-reading:checked~.basic-content .panel-reading,#tab-grammar:checked~.basic-content .panel-grammar,#tab-talk:checked~.basic-content .panel-talk,#tab-food:checked~.basic-content .panel-food,#tab-body:checked~.basic-content .panel-body,#tab-symptom:checked~.basic-content .panel-symptom,#tab-medical:checked~.basic-content .panel-medical{display:block}
 .basic-title{margin:0 0 18px;padding-left:16px;font-size:27px;line-height:1.4;color:#1f3b57;font-weight:800;border-left:6px solid #8fbf6a}
 .basic-subhead{margin:30px 0 14px;font-size:20px;line-height:1.5;color:#1f3b57;font-weight:800}
 .basic-lead{margin:0 0 20px;padding:18px 20px;border-radius:14px;background:#f7faf3;border:1px solid #dfe8d6;color:#3f4939;line-height:1.9;font-size:16px}
@@ -73,6 +73,14 @@ body{margin:0;font-family:'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;c
 .basic-chip{display:inline-block;padding:7px 10px;border-radius:999px;background:#f3f6ef;border:1px solid #dce5d4;color:#3f4939;font-size:14px}
 @media(max-width:760px){.mk-header-inner{padding:14px 16px;gap:14px;align-items:flex-start}.mk-nav{gap:3px}.mk-dropdown>summary{padding:8px 9px;font-size:15px}.mk-dropdown-menu{left:auto;right:0;min-width:176px}.site-cover--inner{height:250px}.basic-section{margin:20px 14px;padding:38px 18px}.basic-grid,.basic-grid.three{grid-template-columns:1fr}.basic-tabs{gap:8px}.basic-tabs label{padding:9px 13px;font-size:14px}}
 @media(max-width:480px){.mk-header-inner{flex-direction:column;align-items:stretch}.mk-nav{justify-content:flex-start}.mk-dropdown-menu{left:0;right:auto}}
+
+.basic-contrast{display:grid;grid-template-columns:minmax(120px,.45fr) 1fr;gap:12px 18px;align-items:start;margin:10px 0}
+.basic-contrast .lhs{font-weight:800;color:#1f3b57}
+.basic-reading-line{margin:10px 0;padding:12px 15px;border:1px solid #e7e0d5;background:#fff;border-radius:12px;line-height:1.85}
+.basic-reading-line .basic-roman{display:block;font-size:1.08em;color:#2f2a24}
+.basic-reading-line .hint{display:block;margin-top:4px;color:#6d675f;font-size:14px}
+@media(max-width:640px){.basic-contrast{grid-template-columns:1fr;gap:4px}}
+
 </style>
 </head>
 <body>
@@ -96,7 +104,10 @@ body{margin:0;font-family:'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;c
 
   <input type="radio" name="basic-tab" id="tab-overview" checked>
   <input type="radio" name="basic-tab" id="tab-sound">
+  <input type="radio" name="basic-tab" id="tab-pron">
   <input type="radio" name="basic-tab" id="tab-tone">
+  <input type="radio" name="basic-tab" id="tab-advancedtone">
+  <input type="radio" name="basic-tab" id="tab-reading">
   <input type="radio" name="basic-tab" id="tab-grammar">
   <input type="radio" name="basic-tab" id="tab-talk">
   <input type="radio" name="basic-tab" id="tab-food">
@@ -107,7 +118,10 @@ body{margin:0;font-family:'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;c
   <div class="basic-tabs" role="tablist" aria-label="基礎台語主題">
     <label for="tab-overview">總覽</label>
     <label for="tab-sound">羅馬字佮發音</label>
+    <label for="tab-pron">正音重點</label>
     <label for="tab-tone">聲調佮變調</label>
+    <label for="tab-advancedtone">進階聲調</label>
+    <label for="tab-reading">唸讀練習</label>
     <label for="tab-grammar">基本語法</label>
     <label for="tab-talk">生活會話</label>
     <label for="tab-food">食物佮日常</label>
@@ -124,6 +138,9 @@ body{margin:0;font-family:'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;c
         <div class="basic-card blue"><h3>聲調</h3><p>台語音節有七个基本聲調：五个舒聲調、兩个入聲調。字佮字鬥做伙，koh有本調、變調佮連紲變調。</p></div>
         <div class="basic-card orange"><h3>詞彙佮生活</h3><p>詞彙愛沓沓仔增加。詞彙量若有夠，才會使自由講出家己心內ê想法，佮人溝通。對食物、厝內、身軀到看病，lóng是日常生活會用著ê語言。</p></div>
         <div class="basic-card purple"><h3>句型、文法</h3><p>台語文法佮華語無仝！！問句、時態、代名詞、比較句佮語序，lóng愛直接用台語ê句型來練。</p></div>
+        <div class="basic-card green"><h3>正音</h3><p>會曉講台語，無代表逐个音攏已經分會清楚。聲母、鼻化、入聲韻尾佮第三聲、第七聲，是正音練習內底真重要ê所在。</p></div>
+        <div class="basic-card blue"><h3>進階聲調</h3><p>一般變調以外，koh有 <span class="basic-roman">á</span> 前變調、失調（輕聲）佮第九聲。欲講kah自然，這寡規則愛綴語句做伙練。</p></div>
+
       </div>
       <div class="basic-lead">你可能會曉一寡日常生活台語，但是你nā beh做醫療，照護甚至上基本ê關心老大人等等，你敢會曉用台語正確表達？了解重要名詞án-tsuánn講，了解基本身體ê解說。</div>
     </section>
@@ -146,6 +163,31 @@ body{margin:0;font-family:'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;c
       </div>
       <h3 class="basic-subhead">拼寫練習</h3>
       <div class="basic-dialogue"><p class="basic-roman">pài → pài-pài　／　sái → sái-tshia　／　hái → tuā-hái　／　kái → kái-piàn</p><p class="basic-roman">tiān → tiān-hué　／　kiān → kiān-khong　／　sian → sian-thô　／　ping → ki-á-ping</p><p class="basic-roman">pun → pùn-sò　／　kun → kun-tsú　／　tsûn → tsûn-tsāi　／　iûnn → hái-iûnn</p></div>
+      <h3 class="basic-subhead">為啥物愛學羅馬字？</h3>
+      <div class="basic-grid">
+        <div class="basic-card green"><h3>漢字佮發音無一定直接對應</h3><p>漢字會曉看，無一定會曉唸；會曉唸，mā無一定知影彼ê字tī無仝詞內底ê聲音。羅馬字直接標出聲音，對學發音真有幫助。</p></div>
+        <div class="basic-card blue"><h3>羅馬字是聲音ê分析工具</h3><p>一个音節會使拆做聲母、介音、韻腹、韻尾佮聲調。看會曉拆，聽音佮正音就khah有根據。</p></div>
+      </div>
+
+      <h3 class="basic-subhead">鼻化母音</h3>
+      <div class="basic-card orange"><p>鼻化用 <span class="basic-roman">nn</span> 做記號，而且 <span class="basic-roman">nn</span> 一定寫tī拼寫ê上尾。鼻化無等於加一个 <span class="basic-roman">n</span> 韻尾；發音ê時，母音ê氣流有一部分ùi鼻腔出去。</p>
+        <p class="basic-roman">pa / pann　pha / phann　ta / tann　tha / thann　ka / kann　kha / khann</p>
+        <p class="basic-roman">pe / penn　phe / phenn　te / tenn　the / thenn　ke / kenn　khe / khenn</p>
+      </div>
+
+      <h3 class="basic-subhead">聲調符號囥佗位？</h3>
+      <div class="basic-card purple">
+        <p>聲調符號一定寫tī母音頂頭。一般順序會使按呢記：</p>
+        <ul>
+          <li>有 <span class="basic-roman">a</span>，聲調符號優先囥tī <span class="basic-roman">a</span>：<span class="basic-roman">tâi、kái、kuài</span>。</li>
+          <li>無 <span class="basic-roman">a</span>，有 <span class="basic-roman">e</span>，囥tī <span class="basic-roman">e</span>：<span class="basic-roman">uē</span>。</li>
+          <li><span class="basic-roman">i</span> 佮 <span class="basic-roman">o</span> 做伙，囥tī <span class="basic-roman">o</span>：<span class="basic-roman">iô</span>。</li>
+          <li><span class="basic-roman">u</span> 佮 <span class="basic-roman">i</span> 做伙，囥tī後壁彼个母音：<span class="basic-roman">uî、iû</span>。</li>
+          <li><span class="basic-roman">oo</span> 若有聲調，囥tī頭前彼个 <span class="basic-roman">o</span>：<span class="basic-roman">ôo、tôo</span>。</li>
+          <li>若無母音，干焦有 <span class="basic-roman">m、ng</span>，聲調符號直接寫tī頂頭：<span class="basic-roman">m̄、m̂、ńg、n̂g</span>。</li>
+        </ul>
+      </div>
+
     </section>
 
     <section class="basic-panel panel-tone">
@@ -163,7 +205,7 @@ body{margin:0;font-family:'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;c
         <tr><td>8</td><td class="basic-roman">tsuá-a̍p</td><td class="basic-roman">tsin ku̍t</td><td class="basic-roman">koo-ta̍k</td><td class="basic-roman">tuā-tsio̍h</td></tr>
       </tbody></table></div>
       <h3 class="basic-subhead">變調規則整理</h3>
-      <div class="basic-card green"><h3 class="basic-roman">5 → 7 → 3 → 2 → 1 → 7</h3><p>入聲：4 → 高短促；8 → 中短促。</p><p>台語ê「字」佮「字」鬥做伙，若超過一个音節，除了上尾一个音節，頭前ê音節lóng愛讀做「變調」。</p></div>
+      <div class="basic-card green"><h3>一般舒聲變調</h3><p class="basic-roman">1 → 7　／　7 → 3　／　3 → 2　／　2 → 1　／　5 → 7（有ê腔口會變做 3）</p><p>入聲：第四聲變調會衝khah懸；第八聲變調會降kē。</p><p>台語ê「字」佮「字」鬥做伙，若超過一个音節，除了上尾一个音節，頭前ê音節通常愛變調。</p></div>
       <div class="basic-grid">
         <div class="basic-card"><h3>1 → 7</h3><p class="basic-roman">ai-siong → siong-sim → sim-kuann → kuann-hong → hong-tsiam</p></div>
         <div class="basic-card"><h3>7 → 3</h3><p class="basic-roman">tiōng-tāi → tāi-huē → huē-gī → gī-lūn → lūn-piān</p></div>
@@ -171,6 +213,131 @@ body{margin:0;font-family:'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;c
         <div class="basic-card"><h3>2 → 1</h3><p class="basic-roman">sán-phín → phín-kuán → kuán-lí → lí-kái → kái-tsiú</p></div>
       </div>
       <div class="basic-note">句中名詞ê上尾一个音節維持本調；句中ê動詞佮形容詞，只要m̄是上尾一个音節，就愛變調；人稱代名詞 <span class="basic-roman">lí, guá, i, lín, guán/gún, lán, in</span> mā愛變調。</div>
+      <h3 class="basic-subhead">正音時上愛細膩ê聲調</h3>
+      <div class="basic-grid">
+        <div class="basic-card blue"><h3>第一聲佮第七聲</h3><p>這兩聲lóng是長音，真濟初學者會濫糝。第一聲khah懸，第七聲是中平。</p><p class="basic-roman">hong / hōng　thai / thāi　tsin / tsīn　kiann / kiānn</p></div>
+        <div class="basic-card orange"><h3>第二聲佮第三聲</h3><p>第二聲佮第三聲lóng有降勢，m̄-koh開始ê音懸佮落勢無仝，ài用詞彙一組一組比對。</p><p class="basic-roman">sái / sài　thái / thài　tsáu / tsàu　káu / kàu</p></div>
+      </div>
+
+      <h3 class="basic-subhead">入聲無干焦是「短」</h3>
+      <div class="basic-card purple"><p><span class="basic-roman">p、t、k、h</span> 會使做聲母，mā會使做入聲韻尾。做韻尾ê時，喙型會kā氣流收束，所以入聲比舒聲短；m̄是干焦唸短就算入聲。</p>
+        <div class="basic-contrast"><div class="lhs">無入聲／有入聲</div><div class="basic-roman">pa / pap / ap　　ta / tat / at　　ka / kak / ak　　ha / hah / ah</div></div>
+        <div class="basic-contrast"><div class="lhs">第八聲</div><div class="basic-roman">pa̍p / a̍p　　ta̍t / a̍t　　ka̍k / a̍k　　ha̍h / a̍h</div></div>
+      </div>
+
+      <h3 class="basic-subhead">連紲變調ê基本原則</h3>
+      <div class="basic-note">
+        <p>完整ê一句話，上尾一个音節一定讀本調；話若猶未講了，上尾音節mā可能愛變調。</p>
+        <p>句中名詞ê結束音節維持本調。副詞、動詞、形容詞若m̄是佇話句上尾，通常愛變調。</p>
+        <p>「ê」tī句中會變調；「ê」頭前彼个音節維持本調。人稱代名詞一般情形lóng愛變調。</p>
+      </div>
+
+    </section>
+
+
+    <section class="basic-panel panel-pron">
+      <h2 class="basic-title">正音重點</h2>
+      <p class="basic-lead">正音毋是欲規定逐个人一定愛講仝一款腔口。這馬ê練習重點，是先予聲母、韻母、鼻化佮入聲韻尾分會清楚，koh用羅馬字幫助家己聽音佮校正發音。</p>
+
+      <h3 class="basic-subhead">聲母愛分清楚</h3>
+      <div class="basic-table-wrap"><table class="basic-table"><thead><tr><th>組別</th><th>正音重點</th><th>練習</th></tr></thead><tbody>
+        <tr><td class="basic-roman">p / ph / b</td><td>無送氣、送氣、有聲愛分開。</td><td class="basic-roman">pa / pha / ba　po / pho / bo</td></tr>
+        <tr><td class="basic-roman">t / th / l / n</td><td>舌尖ê接觸位置仝款，m̄-koh送氣、鼻音佮有聲方式無仝。</td><td class="basic-roman">ta / tha / la / na</td></tr>
+        <tr><td class="basic-roman">k / kh / g / ng</td><td>舌根音愛注意有送氣、無送氣、有聲佮鼻音。</td><td class="basic-roman">ka / kha / ga / nga</td></tr>
+        <tr><td class="basic-roman">ts / tsh / j</td><td>舌尖擦音ê送氣佮有聲差別愛聽會出來。</td><td class="basic-roman">tsa / tsha / ja</td></tr>
+      </tbody></table></div>
+
+      <h3 class="basic-subhead">鼻音佮鼻化愛分開</h3>
+      <div class="basic-grid">
+        <div class="basic-card green"><h3>鼻音聲母</h3><p><span class="basic-roman">m、n、ng</span> 是聲母，本身就有鼻音性質。</p><p class="basic-roman">ma　na　nga　m̂　n̂g</p></div>
+        <div class="basic-card blue"><h3>鼻化母音</h3><p><span class="basic-roman">ann、enn、inn、onn</span> 是母音鼻化，寫法用 <span class="basic-roman">nn</span> 標記。</p><p class="basic-roman">pann / pa　penn / pe　kinn / ki　konn / ko</p></div>
+      </div>
+
+      <h3 class="basic-subhead">常見ê發音混淆</h3>
+      <div class="basic-card orange">
+        <div class="basic-contrast"><div class="lhs"><span class="basic-roman">ing</span></div><div>台語 <span class="basic-roman">ing</span> 愛對 <span class="basic-roman">i</span> 滑去 <span class="basic-roman">ng</span>，毋通直接套用英語ê <span class="basic-roman">-ing</span>。練習：<span class="basic-roman">sîng-kong、hái-íng</span>。</div></div>
+        <div class="basic-contrast"><div class="lhs"><span class="basic-roman">kuân / kuânn</span></div><div>一个無鼻化，一个有鼻化。練習：<span class="basic-roman">kuân-suann、kuânn-thinn</span>。</div></div>
+        <div class="basic-contrast"><div class="lhs">聲音收束</div><div>入聲韻尾愛確實收束：<span class="basic-roman">ap、at、ak、ah</span>；毋通加一个額外ê母音。</div></div>
+      </div>
+
+      <h3 class="basic-subhead">聲韻拼寫練習</h3>
+      <div class="basic-dialogue">
+        <p class="basic-roman">A-pa　phah-pho̍k-á　ka-to　kha</p>
+        <p class="basic-roman">kha-tê　ku　tshia-thâu　tshài-tshī-á</p>
+        <p class="basic-roman">pî-pê　ti-kha　thiàu-bú　han-tsî</p>
+        <p class="basic-roman">phô-tô　phōng-kó　thinn-sài　tham-sim</p>
+      </div>
+    </section>
+
+
+    <section class="basic-panel panel-advancedtone">
+      <h2 class="basic-title">進階聲調</h2>
+      <p class="basic-lead">一般本調佮變調掌握了後，koh有三組真重要ê現象：<span class="basic-roman">á</span> 前變調、失調（輕聲）佮第九聲。這寡lóng愛放tī詞佮話句內底練，才會聽出差別。</p>
+
+      <h3 class="basic-subhead"><span class="basic-roman">á</span> 前變調</h3>
+      <div class="basic-card green"><p>「<span class="basic-roman">á</span>」是台語真常見ê後綴，漢字常寫做「仔」。伊無法度單獨使用，一定佮別个詞鬥做伙。有幾个聲調tī <span class="basic-roman">á</span> 頭前，變調方式佮一般規則無仝。</p></div>
+      <div class="basic-table-wrap"><table class="basic-table"><thead><tr><th>本調</th><th><span class="basic-roman">á</span> 頭前</th><th>例</th></tr></thead><tbody>
+        <tr><td>1、2、4、5</td><td>照一般變調</td><td class="basic-roman">kau-á　káu-á　toh-á　tsûn-á</td></tr>
+        <tr><td>3</td><td>變做第一聲</td><td class="basic-roman">pòo-á　tshìn-á　kuà-á</td></tr>
+        <tr><td>7</td><td>維持第七聲</td><td class="basic-roman">biō-á　kū-á　tē-á　kuī-á</td></tr>
+        <tr><td>8</td><td>韻尾照舊，音值倚第七聲</td><td class="basic-roman">io̍h-á　tsha̍t-á　lo̍k-á　pu̍t-á</td></tr>
+      </tbody></table></div>
+
+      <h3 class="basic-subhead">失調（輕聲）</h3>
+      <div class="basic-card blue">
+        <p>失調一般講「輕聲變調」。羅馬字用兩个橫劃 <span class="basic-roman">--</span> 表示。失調ê音節會失去原來ê基本調，轉做固定ê輕聲，抑是綴頭前音節ê聲調。</p>
+        <p class="basic-roman">Guá-ê tsheh bô--khì.　Guá beh koh lim--nn̄g-au.</p>
+      </div>
+      <div class="basic-grid">
+        <div class="basic-card orange"><h3>實詞失調</h3><p>動詞、形容詞佮一般名詞失調，常轉做固定ê低降短調。</p><p class="basic-roman">kiann-sí / kiann--sí<br>āu-ji̍t / āu--ji̍t<br>phah-khui / phah--khui<br>bô-khì / bô--khì</p></div>
+        <div class="basic-card purple"><h3>虛詞失調</h3><p>功能詞、語尾助詞、人稱代名詞等，會綴頭前音節ê聲調。頭前第一聲→第一聲；第五、七聲→第七聲；第二、三、入聲→第三聲。</p><p class="basic-roman">tshenn--ê　tinn--ê　âng--ê　kóng--ê　tǹg--ê</p></div>
+      </div>
+
+      <h3 class="basic-subhead">第九聲</h3>
+      <div class="basic-card green"><p>第九聲是台語ê特殊聲調，毋是一般本調，mā毋是一般變調。伊固定出現tī一寡外來語、合音、情緒／擬音，佮一部分三連音內底。</p></div>
+      <div class="basic-grid three">
+        <div class="basic-card"><h3>外來語</h3><p class="basic-roman">a̋i-sat-tsuh<br>ba̋i-khín<br>kha̋ng-páng<br>li̋n-jín</p></div>
+        <div class="basic-card"><h3>合音</h3><p class="basic-roman">m̄-ài → mài<br>lâi-khì → lài / laih<br>bô-ài khì → ba̋i khì</p></div>
+        <div class="basic-card"><h3>情緒、擬音</h3><p class="basic-roman">e̋　ua̋　ha̋nn　sihnn-sua̋inn　kīnn-kua̋inn</p></div>
+      </div>
+
+      <h3 class="basic-subhead">三連音</h3>
+      <div class="basic-card orange"><p>台語三疊字形容詞會當表示真懸ê程度。若本調是 1、5、7、8，第一音節會出現第九聲，第二音節照一般變調，上尾音節維持本調。</p>
+        <p class="basic-roman">kam-kam-kam（甘甘甘）<br>iû-iû-iû（油油油）<br>tuā-tuā-tuā（大大大）<br>si̍k-si̍k-si̍k（熟熟熟）</p>
+      </div>
+    </section>
+
+
+    <section class="basic-panel panel-reading">
+      <h2 class="basic-title">唸讀練習</h2>
+      <p class="basic-lead">正音愛綴規句做伙練。先照羅馬字慢慢讀，確認聲母、韻母、入聲佮聲調；了後koh注意詞組邊界、連紲變調佮輕聲。</p>
+
+      <h3 class="basic-subhead">短句：聲韻佮節奏</h3>
+      <div class="basic-reading-line"><span class="basic-roman">A-má khan a-kong kuè tshia-lōo.</span><span class="hint">斟酌 <span class="basic-roman">kh、ng、ue、oo</span>。</span></div>
+      <div class="basic-reading-line"><span class="basic-roman">A-î tshuā a-tiūnn bé sann-á-khòo.</span><span class="hint">斟酌 <span class="basic-roman">tsh、iu、nn、á</span>。</span></div>
+      <div class="basic-reading-line"><span class="basic-roman">Tuā-ko phuānn sió-tī tha̍k-tsheh kui e-poo.</span><span class="hint">斟酌鼻化、入聲佮 <span class="basic-roman">oo</span>。</span></div>
+      <div class="basic-reading-line"><span class="basic-roman">A-bú kā a-tī-á tshīng-ê tshīng puànn-poo.</span><span class="hint">斟酌第七聲、<span class="basic-roman">á</span> 前變調佮「ê」頭前ê本調。</span></div>
+
+      <h3 class="basic-subhead">入聲佮變調</h3>
+      <div class="basic-reading-line"><span class="basic-roman">Tsa̍p-it, tsa̍p-la̍k kah tsa̍p-peh, lóng ū ji̍p-siann.</span></div>
+      <div class="basic-reading-line"><span class="basic-roman">Kì-tî bái, ta̍k-put-sî teh sit-kak-tshat.</span></div>
+      <div class="basic-reading-line"><span class="basic-roman">Beh bé mi̍h-kiānn suah bô tsah tsînn.</span></div>
+      <div class="basic-reading-line"><span class="basic-roman">It-tshè to huat-sing tī tsa̍p-peh-tiám tsa̍p-peh-hun.</span></div>
+
+      <h3 class="basic-subhead">聽寫式唸讀</h3>
+      <div class="basic-reading-line"><span class="basic-roman">Oo-a iau-iau, tshuì uai-uai, thau-tsia̍h sio-sio ê ô-á kah ōo-á.</span></div>
+      <div class="basic-reading-line"><span class="basic-roman">Tuā-ko bīn iu-iu teh huân-ló bîn-á-tsài ê khó-tshì.</span></div>
+      <div class="basic-reading-line"><span class="basic-roman">Kuânn-thinn peh-suann, lâu-kuānn tsin huann-hí.</span></div>
+      <div class="basic-reading-line"><span class="basic-roman">Tú-tio̍h khùn-lân, ài kè-sio̍k phah-piànn, m̄-thang sit-tsì.</span></div>
+      <div class="basic-reading-line"><span class="basic-roman">Kin-á-ji̍t oo-im-thinn, huān-sè ē lo̍h-hōo.</span></div>
+
+      <h3 class="basic-subhead">輕聲練習</h3>
+      <div class="basic-reading-line"><span class="basic-roman">Hue khui--ah, phang-bī pue--tshut-khì, ia̍h-á lâi--ah, káu-hiā mā peh--khí-lâi.</span></div>
+      <div class="basic-reading-line"><span class="basic-roman">Tsú hó--ah, kín tńg--lâi, tshiú sé-sé--leh, tsia̍h-pn̄g--ah.</span></div>
+      <div class="basic-reading-line"><span class="basic-roman">Lí siunn-tsá lâi--ah, āu--ji̍t tsiah lâi tō hó.</span></div>
+
+      <h3 class="basic-subhead">正音家己檢查</h3>
+      <div class="basic-note">唸一遍了後，家己聽看覓：鼻化有出來無？入聲韻尾有收束無？第三聲佮第七聲有濫糝無？話句內底ê本調佮變調有照詞組邊界變化無？</div>
     </section>
 
     <section class="basic-panel panel-grammar">
