@@ -4,7 +4,335 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>經歷｜Marang Khu</title>
-  <link rel="stylesheet" href="../../assets/css/style.css">
+<style id="mk-site-style">
+:root {
+  --ink: #2f2a24;
+  --muted: #5f5a52;
+  --navy: #1f3b57;
+  --green: #6b8548;
+  --paper: #ffffff;
+  --line: #e6dccb;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+  color: var(--ink);
+  background: #f7f6f2;
+}
+
+/* Header / navigation */
+.mk-header {
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  background: rgba(255,255,255,.98);
+  border-bottom: 1px solid #e9e5dd;
+}
+
+.mk-header-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.mk-brand {
+  color: var(--navy);
+  text-decoration: none;
+  font-size: 19px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.mk-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mk-dropdown {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.mk-dropdown > summary {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  color: #514c45;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mk-dropdown > summary::-webkit-details-marker { display: none; }
+
+.mk-dropdown > summary::after {
+  content: "▾";
+  font-size: 11px;
+  opacity: .7;
+  transition: transform .16s ease;
+}
+
+.mk-dropdown[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+/* Hover only highlights. It does NOT open the menu. */
+.mk-dropdown > summary:hover,
+.mk-nav-link:hover {
+  background: #f2f5ee;
+  color: var(--navy);
+}
+
+.mk-dropdown > summary:focus-visible,
+.mk-nav-link:focus-visible,
+.mk-dropdown-menu a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(31,95,139,.18);
+}
+
+.mk-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 1200;
+  min-width: 188px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #e3ddd3;
+  border-radius: 14px;
+  box-shadow: 0 14px 34px rgba(40,40,40,.14);
+}
+
+.mk-dropdown-menu li { margin: 0; padding: 0; }
+
+.mk-dropdown-menu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 9px;
+  color: #2f2a24;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mk-dropdown-menu a:hover {
+  background: #f5f7f2;
+  color: var(--navy);
+}
+
+.mk-nav-link {
+  display: inline-block;
+  padding: 9px 12px;
+  border-radius: 9px;
+  color: #514c45;
+  text-decoration: none;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+main { min-height: 60vh; }
+
+.page-shell {
+  max-width: 980px;
+  margin: 36px auto;
+  padding: 42px 28px;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(60,45,30,.08);
+}
+.page-shell h1 { margin-top: 0; color: var(--navy); }
+
+.placeholder {
+  margin-top: 24px;
+  padding: 22px;
+  border: 1px dashed #b9b3aa;
+  border-radius: 14px;
+  color: #6b655d;
+  background: #fbfaf7;
+}
+
+.education-section {
+  max-width: 980px;
+  margin: 36px auto;
+  padding: 56px 28px 20px;
+  color: #2f2a24;
+  background: linear-gradient(135deg, #faf6ed 0%, #ffffff 55%, #f3f7ef 100%);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(60,45,30,.10);
+}
+.education-heading { margin-bottom: 18px; }
+.education-label {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #5d7442;
+  background: #eef5e6;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.education-grid { display: grid; gap: 18px; }
+.edu-card {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 22px;
+  padding: 24px 26px;
+  background: rgba(255,255,255,.88);
+  border: 1px solid #e6dccb;
+  border-left: 6px solid var(--accent, #8fbf6a);
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(40,40,40,.06);
+}
+.edu-date { font-weight: 700; color: var(--accent-text,#6b8548); font-size: 15px; }
+.edu-card h3 { margin: 0 0 8px; font-size: 22px; color: #1f3b57; }
+.edu-degree { font-size: 18px; font-weight: 700; color: #2f2a24; }
+.edu-place { margin-top: 8px; font-size: 15px; color: #7a746b; }
+
+.site-footer {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 30px 24px 48px;
+  color: #777168;
+  font-size: 14px;
+}
+
+@media (max-width: 700px) {
+  .mk-header-inner {
+    padding: 14px 16px;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .mk-nav { gap: 3px; }
+  .mk-dropdown > summary,
+  .mk-nav-link { padding: 8px 9px; font-size: 15px; }
+  .mk-dropdown-menu { left: auto; right: 0; min-width: 176px; }
+  .education-section, .page-shell { margin: 20px 14px; }
+  .edu-card { grid-template-columns: 1fr; gap: 10px; }
+}
+
+@media (max-width: 480px) {
+  .mk-header-inner { flex-direction: column; align-items: stretch; }
+  .mk-nav { justify-content: flex-start; }
+  .mk-dropdown-menu { left: 0; right: auto; }
+}
+
+/* Teaching pages */
+.mk-teaching-menu {
+  min-width: 220px;
+}
+
+.course-under-construction,
+.teaching-overview {
+  max-width: 980px;
+  margin: 36px auto;
+  padding: 52px 28px 44px;
+  text-align: center;
+  background: linear-gradient(135deg, #faf6ed 0%, #ffffff 55%, #f3f7ef 100%);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(60,45,30,.08);
+}
+
+.course-label {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #eef5e6;
+  color: #5d7442;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.course-under-construction h1,
+.teaching-overview h1 {
+  margin: 0 0 28px;
+  color: #1f3b57;
+  font-size: 32px;
+}
+
+.construction-animation {
+  margin: 24px auto 0;
+  max-width: 560px;
+}
+
+.construction-animation img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 10px 0 28px;
+}
+
+.course-grid a {
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 18px;
+  border-radius: 8px;
+  background: #697c60;
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.course-grid a:hover,
+.course-grid a:focus-visible {
+  background: #596d51;
+  outline: none;
+}
+
+@media (max-width: 760px) {
+  .course-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .course-under-construction,
+  .teaching-overview {
+    margin: 20px 14px;
+    padding: 38px 18px 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* v7 hardening: header must render correctly even without external assets */
+.mk-header, .mk-header * { box-sizing: border-box; }
+.mk-dropdown > summary { list-style: none !important; }
+.mk-dropdown > summary::-webkit-details-marker { display: none !important; }
+.mk-dropdown > summary::marker { content: ""; }
+.mk-dropdown:not([open]) > .mk-dropdown-menu { display: none !important; }
+.mk-dropdown[open] > .mk-dropdown-menu { display: block !important; }
+.mk-brand:link, .mk-brand:visited { color: #1f3b57; text-decoration: none; }
+.mk-nav-link:link, .mk-nav-link:visited { color: #514c45; text-decoration: none; }
+</style>
 </head>
 <body>
 <header class="mk-header">
@@ -114,6 +442,30 @@
 
 </main>
 <footer class="site-footer">Marang Khu</footer>
-<script src="../../assets/js/main.js"></script>
+<script id="mk-site-nav-script">
+document.addEventListener("DOMContentLoaded", function () {
+  const menus = Array.from(document.querySelectorAll("details.mk-dropdown"));
+
+  menus.forEach(function (menu) {
+    menu.addEventListener("toggle", function () {
+      if (!menu.open) return;
+      menus.forEach(function (other) {
+        if (other !== menu) other.open = false;
+      });
+    });
+  });
+
+  document.addEventListener("click", function (event) {
+    if (event.target.closest("details.mk-dropdown")) return;
+    menus.forEach(function (menu) { menu.open = false; });
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      menus.forEach(function (menu) { menu.open = false; });
+    }
+  });
+});
+</script>
 </body>
 </html>
