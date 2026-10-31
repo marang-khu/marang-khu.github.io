@@ -244,7 +244,20 @@ body{margin:0;font-family:'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;c
 @media(max-width:360px){.tlp .tlp-stage{padding:10px 7px}.tlp .tlp-stage[aria-current='step']{padding:9px 6px}.tlp .tlp-stage-name{font-size:13px}.tlp .tlp-workspace{padding:16px 13px}.tlp .tlp-feedback{padding:14px 11px}.tlp .tlp-meta{font-size:11px;gap:6px}.tlp .tlp-meta span{padding:3px 7px}.tlp .tlp-actions>.tlp-button{width:100%}.tlp .tlp-select-label{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.tlp *{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
-</style><!-- TAILO-PRACTICE-V4:STYLE:END --></head>
+</style><!-- TAILO-PRACTICE-V4:STYLE:END --><style id="basic-spelling-audio-style">
+#basic-spelling-practice{scroll-margin-top:24px}
+.basic-spelling .basic-spelling-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:10px 0}
+.basic-spelling-play{display:flex;align-items:center;gap:8px;width:100%;min-width:0;min-height:46px;padding:10px 12px;border:1px solid #d9dfcf;border-radius:9px;background:#fafcf7;color:var(--navy);font:inherit;text-align:left;cursor:pointer;touch-action:manipulation}
+.basic-spelling-play>span:first-child{font:13px Arial,sans-serif;flex-shrink:0;color:#526d32}
+.basic-spelling-play:hover{background:#eef5e6;border-color:#8fbf6a}
+.basic-spelling-play.is-playing{background:#e7f0dd;border-color:#526d32;box-shadow:0 0 0 2px #d5dfc9}
+.basic-spelling-play:focus-visible,.basic-spelling-stop:focus-visible{outline:3px solid #b8782f;outline-offset:3px}
+.basic-spelling-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px;font-size:14px;color:var(--muted)}
+.basic-spelling-stop{min-height:44px;padding:8px 13px;border:1px solid #d9dfcf;border-radius:9px;background:#fff;color:var(--navy);font:inherit;cursor:pointer;touch-action:manipulation}
+.basic-spelling-stop:disabled{opacity:.5;cursor:default}
+@media(max-width:760px){.basic-spelling .basic-spelling-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.basic-spelling-play{padding:10px 8px;gap:6px}}
+@media(max-width:380px){.basic-spelling .basic-spelling-row{grid-template-columns:1fr}}
+</style></head>
 <body>
 <header class="mk-header">
   <div class="mk-header-inner">
@@ -424,12 +437,13 @@ body{margin:0;font-family:'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;c
         <div class="basic-contrast"><div class="lhs">聲音收束</div><div>入聲韻尾愛確實收束：<span class="basic-roman">ap、at、ak、ah</span>；毋通加一个額外ê母音。</div></div>
       </div>
 
-      <h3 class="basic-subhead">聲韻拼寫練習</h3>
-      <div class="basic-dialogue">
-        <p class="basic-roman">A-pa　phah-pho̍k-á　ka-to　kha</p>
-        <p class="basic-roman">kha-tê　ku　tshia-thâu　tshài-tshī-á</p>
-        <p class="basic-roman">pî-pê　ti-kha　thiàu-bú　han-tsî</p>
-        <p class="basic-roman">phô-tô　phōng-kó　thinn-sài　tham-sim</p>
+      <h3 id="basic-spelling-practice" class="basic-subhead">聲韻拼寫練習</h3>
+      <div id="basic-spelling-audio" class="basic-dialogue basic-spelling" aria-labelledby="basic-spelling-practice">
+        <p class="basic-roman basic-spelling-row"><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/01-a-pa.mp3" data-spelling-word="A-pa" aria-label="聽 A-pa ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">A-pa</span></button><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/02-phah-phok-a.mp3" data-spelling-word="phah-pho̍k-á" aria-label="聽 phah-pho̍k-á ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">phah-pho̍k-á</span></button><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/03-ka-to.mp3" data-spelling-word="ka-to" aria-label="聽 ka-to ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">ka-to</span></button><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/04-kha.mp3" data-spelling-word="kha" aria-label="聽 kha ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">kha</span></button></p>
+        <p class="basic-roman basic-spelling-row"><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/05-kha-te.mp3" data-spelling-word="kha-tê" aria-label="聽 kha-tê ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">kha-tê</span></button><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/06-ku.mp3" data-spelling-word="ku" aria-label="聽 ku ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">ku</span></button><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/07-tshia-thau.mp3" data-spelling-word="tshia-thâu" aria-label="聽 tshia-thâu ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">tshia-thâu</span></button><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/08-tshai-tshi-a.mp3" data-spelling-word="tshài-tshī-á" aria-label="聽 tshài-tshī-á ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">tshài-tshī-á</span></button></p>
+        <p class="basic-roman basic-spelling-row"><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/09-pi-pe.mp3" data-spelling-word="pî-pê" aria-label="聽 pî-pê ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">pî-pê</span></button><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/10-ti-kha.mp3" data-spelling-word="ti-kha" aria-label="聽 ti-kha ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">ti-kha</span></button><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/11-thiau-bu.mp3" data-spelling-word="thiàu-bú" aria-label="聽 thiàu-bú ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">thiàu-bú</span></button><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/12-han-tsi.mp3" data-spelling-word="han-tsî" aria-label="聽 han-tsî ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">han-tsî</span></button></p>
+        <p class="basic-roman basic-spelling-row"><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/13-pho-to.mp3" data-spelling-word="phô-tô" aria-label="聽 phô-tô ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">phô-tô</span></button><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/14-phong-ko.mp3" data-spelling-word="phōng-kó" aria-label="聽 phōng-kó ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">phōng-kó</span></button><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/15-thinn-sai.mp3" data-spelling-word="thinn-sài" aria-label="聽 thinn-sài ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">thinn-sài</span></button><button type="button" class="basic-spelling-play" data-spelling-src="audio/spelling/16-tham-sim.mp3" data-spelling-word="tham-sim" aria-label="聽 tham-sim ê唸法"><span aria-hidden="true">▷</span><span lang="nan-Latn-TW">tham-sim</span></button></p>
+        <div class="basic-spelling-controls"><button type="button" class="basic-spelling-stop" data-spelling-stop disabled>停落來</button><span data-spelling-status role="status" aria-live="polite" aria-atomic="true">揤詞彙聽唸法。</span></div>
       </div>
     </section>
 
@@ -2179,6 +2193,99 @@ document.addEventListener('DOMContentLoaded',function(){
   openFromHash();
 })();
 
-</script><!-- TAILO-PRACTICE-V4:SCRIPT:END --></body>
+</script><!-- TAILO-PRACTICE-V4:SCRIPT:END --><script id="basic-spelling-audio-script">
+(function () {
+  'use strict';
+  var root = document.getElementById('basic-spelling-audio');
+  var tab = document.getElementById('tab-pron');
+  if (!root || !tab) return;
+  var status = root.querySelector('[data-spelling-status]');
+  var stopButton = root.querySelector('[data-spelling-stop]');
+  var active = null;
+  var activeButton = null;
+  var timer = null;
+  var generation = 0;
+
+  function stop(message) {
+    generation += 1;
+    clearTimeout(timer);
+    if (active) {
+      active.pause();
+      active.removeAttribute('src');
+      active.load();
+      active.remove();
+      active = null;
+    }
+    if (activeButton) {
+      activeButton.classList.remove('is-playing');
+      activeButton.removeAttribute('aria-busy');
+      activeButton = null;
+    }
+    stopButton.disabled = true;
+    if (message) status.textContent = message;
+  }
+
+  function play(button) {
+    stop();
+    var request = generation;
+    var word = button.getAttribute('data-spelling-word');
+    var audio = document.createElement('audio');
+    audio.preload = 'none';
+    audio.hidden = true;
+    audio.setAttribute('data-spelling-player', word);
+    audio.src = button.getAttribute('data-spelling-src');
+    root.appendChild(audio);
+    active = audio;
+    activeButton = button;
+    button.classList.add('is-playing');
+    button.setAttribute('aria-busy', 'true');
+    stopButton.disabled = false;
+    status.textContent = '咧準備 ' + word + ' ê發音……';
+    function fail() {
+      if (request !== generation) return;
+      stop('這个錄音這馬無法度用，請看網路敢有通，抑是等一下閣試。');
+    }
+    audio.addEventListener('playing', function () {
+      if (request !== generation) return;
+      clearTimeout(timer);
+      button.removeAttribute('aria-busy');
+      status.textContent = '這馬咧唸 ' + word + '。';
+    });
+    audio.addEventListener('ended', function () {
+      if (request === generation) stop(word + ' 唸煞矣，會使家己綴咧唸。');
+    });
+    audio.addEventListener('error', fail);
+    timer = setTimeout(fail, 20000);
+    var promise = audio.play();
+    if (promise && typeof promise.catch === 'function') promise.catch(fail);
+  }
+
+  root.addEventListener('click', function (event) {
+    var button = event.target.closest('[data-spelling-src]');
+    if (button && root.contains(button)) play(button);
+  });
+  stopButton.addEventListener('click', function () { stop('已經停落來矣。'); });
+  document.querySelectorAll('input[name="basic-tab"]').forEach(function (input) {
+    input.addEventListener('change', function () {
+      if (active && !tab.checked) stop('已經停落來矣。');
+    });
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden && active) stop('已經停落來矣。');
+  });
+  window.addEventListener('pagehide', function () { stop(); });
+  function openFromHash() {
+    if (location.hash !== '#basic-spelling-practice') return;
+    tab.checked = true;
+    tab.dispatchEvent(new Event('change', { bubbles: true }));
+    requestAnimationFrame(function () {
+      document.getElementById('basic-spelling-practice').scrollIntoView({ block: 'start' });
+    });
+  }
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
+})();
+</script></body>
 </html>
+
 
